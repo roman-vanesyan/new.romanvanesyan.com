@@ -1,0 +1,52 @@
+---
+heading: Hunting a memory leak in puppeteer
+status: draft
+description: A story about hunting a memory leak in the puppeteer
+tags: ['node-js', 'memory-leak', 'engineering']
+published_at: 2024-08-01
+authored_by: roman-vanesyan
+---
+
+At Bolt we use Puppeteer to create PDFs from HTML templates. It is used for varianty of documents,
+to generate reports, invoices, etc.
+
+Until last month usage of the service was pretty low and we were not having any problems with the load.
+
+At Bolt we recently migrated all ours services to be running on Kubernetes.
+
+However cAdvisor gives only a high-level overview of the memory usage of the container and no possibility
+to see per process memory usage.
+
+There is no easy way to access `top` or `ps`, as access to the host via `kubectl` is restricted.
+
+## Leaky Puppeteer
+
+Diving in the memory stats of the Node.js service didn't show anything useful. The RSS was stable, no unbound heap growth.
+However the memory usage (WSS) of the container was growing over time.
+
+Not only memory was growing, but CPU usage also increased dramatically.
+
+Remember, that we are running in a container and not having access to the host, so one of a few options I had is to
+grab a PID of the Puppeteer process and grab stats for it by reading `/proc/<pid>/status`.
+
+```js
+const browser = await puppeteer.launch({ headless: true });
+const { pid } = await browser.process();
+
+const raw_stats = await fs.promises.readFile(`/proc/${pid}/status`);
+const stats = parse_stats(raw_stats);
+const rss = stats.VmRss;
+
+metric.set(rss);
+```
+
+Observing the stat for the Puppeteer process showed that the RSS was growing over time, finally signifying a memory leak in the puppeteer.
+
+Ok, seems like the CPU problem was coming from number of pages opened in the browser per instance. I tried to limit it with employing a simple
+semaphore.
+
+> Semaphore is a well known data-structure that allows to limit the number of concurrent operations.
+> It simply gives you a number of slots that you can use to perform operations and once the number of slots is exhausted,
+> the next operation will be queued until one of the operations is finished.
+
+However, it didn't help, CPU throttling was still high.

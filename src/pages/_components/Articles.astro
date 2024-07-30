@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import ContentBlock from '@pages/_components/ContentBlock.astro';
+import ArticlePreview from '@pages/_components/ArticlePreview.astro';
+
+const articles = await getCollection('articles');
+---
+
+<ContentBlock heading="Articles">
+  {articles.map((article) => <ArticlePreview article={article} />)}
+</ContentBlock>

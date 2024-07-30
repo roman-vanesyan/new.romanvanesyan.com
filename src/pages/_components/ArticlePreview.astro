@@ -1,0 +1,32 @@
+---
+import { CollectionEntry } from 'astro:content';
+import { format, formatISO } from 'date-fns';
+import Tag from '@pages/_components/Tag.astro';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+---
+
+<article class="bg-stone-100 p-4">
+  <a
+    href={`/articles/${article.slug}`}
+    class="text-blue-700 underline hover:no-underline"
+  >
+    <h3 class="font-sans text-2xl">{article.data.heading}</h3>
+  </a>
+  <div class="py-4">
+    <p class="border-l-4 border-stone-300 px-4 py-2">
+      {article.data.description}
+    </p>
+  </div>
+  <time datetime={formatISO(article.data.published_at)}>
+    {format(article.data.published_at, 'dd/MM/y')}
+  </time>
+  by <a href={article.data.authored_by}>{article.data.authored_by}</a>
+  <div class="flex flex-row gap-2 py-3">
+    {article.data.tags.map((tag) => <Tag tag={tag} />)}
+  </div>
+</article>

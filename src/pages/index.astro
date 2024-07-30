@@ -1,0 +1,66 @@
+---
+import { format, formatISO } from 'date-fns';
+import Layout from '@layouts/Layout.astro';
+import Articles from '@pages/_components/Articles.astro';
+import Bits from '@pages/_components/Bits.astro';
+---
+
+<Layout title="Roman Vanesyan">
+  <div slot="header" class="mx-auto w-full max-w-screen-lg">
+    <div class="flex flex-row gap-16 pb-12 pt-6">
+      <div class="flex-1 text-balance">
+        <h1 class="mb-4 text-3xl">Hello, I am Roman</h1>
+        <p class="text-xl">
+          Here I most often talk about efficient software, productivity tooling,
+          code abstractions, and photography.
+        </p>
+      </div>
+      <nav class="text-2xl">
+        <ul class="flex flex-col gap-1">
+          <li><a href="/about">About</a></li>
+          <li><a href="/bits">Bits</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/photography">Photography</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <main class="mx-auto w-full max-w-screen-2xl">
+    <div class="flex flex-col gap-24">
+      <Bits />
+      <Articles />
+    </div>
+  </main>
+  <div slot="footer" class="pt-12">
+    <div class="bg-stone-100">
+      <div class="mx-auto max-w-screen-lg px-2 py-4">
+        <p class="mb-4 text-balance text-lg">
+          There is no active newsletters mailing, for now. However, consider
+          subscribing, and some day you will be the first one receiving email
+          from me.
+        </p>
+        <form method="post" action="/newsletter/subscribe">
+          <div class="flex flex-row flex-nowrap items-end gap-2">
+            <div class="flex flex-col">
+              <label for="email">Email</label>
+              <input
+                class="inline-block border border-stone-600 px-2 py-1"
+                type="email"
+                name="email"
+                id="email"
+              />
+            </div>
+            <button
+              class="border border-stone-600 bg-blue-600 px-4 py-1 text-stone-100"
+              type="submit">Subscribe</button
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="m-auto max-w-screen-lg px-2 py-6">
+      © {format(new Date(), 'y')} Roman Vanesyan
+    </div>
+  </div>
+</Layout>

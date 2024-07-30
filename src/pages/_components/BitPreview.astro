@@ -1,0 +1,27 @@
+---
+import { CollectionEntry } from 'astro:content';
+import { format, formatISO } from 'date-fns';
+import Tag from '@pages/_components/Tag.astro';
+
+interface Props {
+  bit: CollectionEntry<'bits'>;
+}
+
+const { bit } = Astro.props;
+---
+
+<article>
+  <a
+    href={`/bits/${bit.slug}`}
+    class="text-blue-700 underline hover:no-underline"
+  >
+    <h3 class="font-sans text-2xl">{bit.data.heading}</h3>
+  </a>
+  <time datetime={formatISO(bit.data.published_at)}>
+    {format(bit.data.published_at, 'dd/MM/y')}
+  </time>
+  by <a href={bit.data.authored_by}>{bit.data.authored_by}</a>
+  <div class="flex flex-row gap-2">
+    {bit.data.tags.map((tag) => <Tag tag={tag} />)}
+  </div>
+</article>

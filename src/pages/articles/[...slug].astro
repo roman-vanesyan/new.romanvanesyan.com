@@ -1,0 +1,29 @@
+---
+import Layout from '@layouts/Layout.astro';
+import type { GetStaticPaths } from 'astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const articles = await getCollection('articles');
+
+  return articles.map((article) => ({
+    props: { article },
+    params: { slug: article.slug }
+  }));
+};
+
+const { article } = Astro.props;
+if (!article) {
+  return Astro.redirect('/404');
+}
+
+const { Content, ...rest } = await article.render();
+---
+
+<Layout title={article.data.heading}>
+  <Content />
+</Layout>

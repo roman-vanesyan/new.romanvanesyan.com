@@ -1,0 +1,15 @@
+---
+interface Props {
+  heading: string;
+}
+---
+
+<div class="flex flex-row flex-nowrap">
+  <h2 class="w-1/6 pr-8 text-right text-4xl text-stone-600">
+    {Astro.props.heading}
+  </h2>
+  <div class="flex flex-grow flex-col">
+    <slot />
+  </div>
+  <div class="w-1/6"></div>
+</div>

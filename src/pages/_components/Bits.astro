@@ -1,0 +1,12 @@
+---
+import { format, formatISO } from 'date-fns';
+import { getCollection } from 'astro:content';
+import ContentBlock from '@pages/_components/ContentBlock.astro';
+import BitPreview from '@pages/_components/BitPreview.astro';
+
+const bits = await getCollection('bits');
+---
+
+<ContentBlock heading="Bits">
+  {bits.map((bit) => <BitPreview bit={bit} />)}
+</ContentBlock>
