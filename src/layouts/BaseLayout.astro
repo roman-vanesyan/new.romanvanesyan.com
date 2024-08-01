@@ -1,22 +1,20 @@
 ---
+import Head from '@components/Head.astro';
 import '@root/main.css';
 
 interface Props {
   title: string;
+  description: string;
 }
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{Astro.props.title}</title>
+    <Head title={Astro.props.title} description={Astro.props.description} />
+    <slot slot="head" name="head" />
   </head>
-  <body class="flex min-h-screen flex-col bg-zinc-150">
+  <body class="bg-zinc-150 flex min-h-screen flex-col">
     <slot />
   </body>
 </html>

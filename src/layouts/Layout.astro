@@ -3,10 +3,13 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 
 export interface Props {
   title: string;
+  description: string;
 }
 ---
 
-<BaseLayout title={Astro.props.title}>
+<BaseLayout title={Astro.props.title} description={Astro.props.description}>
+  <slot name="head" />
+
   <header>
     <slot name="header" />
   </header>

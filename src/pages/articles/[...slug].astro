@@ -1,7 +1,11 @@
 ---
+import { format, formatISO } from 'date-fns';
 import Layout from '@layouts/Layout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import SubscriptionForm from '@components/SubscriptionForm.astro';
 
 interface Props {
   article: CollectionEntry<'articles'>;
@@ -24,6 +28,39 @@ if (!article) {
 const { Content, ...rest } = await article.render();
 ---
 
-<Layout title={article.data.heading}>
-  <Content />
+<Layout title={article.data.heading} description={article.data.description}>
+  <header class="m-auto max-w-screen-md">
+    <Header>
+      <div slot="left-side" class="flex-grow"></div>
+    </Header>
+  </header>
+  <main class="mx-auto w-full max-w-screen-md">
+    <article class="w-full">
+      <header class="flex w-full flex-col flex-nowrap items-center">
+        <div class="m-auto mb-6">
+          <time
+            datetime={formatISO(article.data.published_at)}
+            class="text-xl text-gray-400"
+          >
+            {format(article.data.published_at, 'PPP')}
+          </time>
+        </div>
+        <h1 class="mb-12 text-balance font-sans text-4xl font-semibold">
+          {article.data.heading}
+        </h1>
+      </header>
+      <div class="text-pretty font-serif text-2xl leading-relaxed">
+        <Content />
+      </div>
+    </article>
+  </main>
+
+  <Footer slot="footer" class="w-full max-w-screen-md pt-12">
+    <div
+      class="mx-auto max-w-screen-sm rounded-lg bg-stone-100 p-6"
+      slot="footer-top"
+    >
+      <SubscriptionForm />
+    </div>
+  </Footer>
 </Layout>
