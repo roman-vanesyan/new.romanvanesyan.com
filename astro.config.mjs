@@ -7,7 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 export default defineConfig({
   prefetch: true,
   site: 'https://romanvanesyan.com',
-  output: 'hybrid',
+  output: 'server',
   integrations: [
     tailwind({
       applyBaseStyles: false
@@ -19,5 +19,14 @@ export default defineConfig({
     syntaxHighlight: 'shiki',
     gfm: true
   },
-  adapter: cloudflare()
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true
+    }
+  }),
+
+  redirects: {
+    '/github': 'https://github.com/roman-vanesyan',
+    '/x': 'https://x.com/roman_vanesyan'
+  }
 });

@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'input'> {
+  errors?: string[];
+}
+
+const { errors = [], id, class: class_list, ...rest } = Astro.props;
+---
+
+<div class="flex flex-col">
+  <label for={id}>
+    <slot name="label" />
+  </label>
+  <input
+    class="inline-block border border-stone-600 px-2 py-1"
+    class:list={[class_list, { '!border-red-600': errors.length }]}
+    id={id}
+    {...rest}
+  />
+  <div class="py-2">
+    {
+      errors.length > 0 ? (
+        <ul class="flex flex-row gap-2">
+          {errors.map((error) => (
+            <li class="text-red-600">{error}</li>
+          ))}
+        </ul>
+      ) : null
+    }
+  </div>
+</div>

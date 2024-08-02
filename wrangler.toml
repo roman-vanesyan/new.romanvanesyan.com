@@ -1,0 +1,8 @@
+name = "romanvanesyan-com"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "d1-romanvanesyan-com-preview-db"
+database_id = "3a75e610-f337-41a1-92e7-afbb52c3c260"
+migrations_dir = "./migrations"

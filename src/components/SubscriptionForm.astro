@@ -1,27 +1,41 @@
 ---
+import { subscription_form_schema, type InferError } from '@api';
+import Input from '@components/Input.astro';
 
+interface Props {
+  validationError?: InferError<typeof subscription_form_schema> | null;
+}
+
+const error = Astro.props.validationError?.flatten() ?? null;
 ---
 
-<div class="mx-auto">
-  <p class="mb-4 text-balance text-lg">
-    There is no active mailing at the moment. However, consider subscribing, and
-    some day you will be the first one receiving email from me.
-  </p>
-  <form method="post" hx-post="/api/subscribe">
-    <div class="flex flex-row flex-nowrap items-end gap-2">
-      <div class="flex flex-col">
-        <label for="email">Email</label>
-        <input
-          class="inline-block border border-stone-600 px-2 py-1"
-          type="email"
-          name="email"
-          id="email"
-        />
+<div class="mx-auto" id="subscription-form">
+  <div class="w-9/12 max-w-screen-sm">
+    <p class="mb-4 text-balance text-lg">
+      There is no active mailing at the moment. However, consider subscribing,
+      and some day you will be the first one receiving email from me.
+    </p>
+    <form
+      method="post"
+      hx-post="/api/subscribe"
+      hx-swap="innerHTML"
+      hx-target="#subscription-form"
+    >
+      <div class="flex flex-col flex-nowrap gap-2">
+        <div class="flex-grow">
+          <Input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Your email here"
+            errors={error?.fieldErrors?.email}
+          />
+          <button
+            class="border border-stone-600 bg-blue-600 px-4 py-1 text-stone-100"
+            type="submit">Subscribe</button
+          >
+        </div>
       </div>
-      <button
-        class="border border-stone-600 bg-blue-600 px-4 py-1 text-stone-100"
-        type="submit">Subscribe</button
-      >
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

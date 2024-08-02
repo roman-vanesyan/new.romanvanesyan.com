@@ -6,7 +6,10 @@
       "@root/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
-      "@pages/*": ["./src/pages/*"]
+      "@pages/*": ["./src/pages/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@api/*": ["./src/api/*"],
+      "@api": ["./src/api/index.ts"]
     }
   }
 }

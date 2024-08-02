@@ -1,0 +1,42 @@
+---
+import create_db from '@root/db';
+import create_subscription, {
+  CreateSubscriptionStatus,
+  type CreateSubscriptionOutput
+} from '@lib/create_subscription';
+import SubscriptionForm from '@components/SubscriptionForm.astro';
+import { subscription_form_schema } from '@api';
+
+export const partial = true;
+
+if (Astro.request.method !== 'POST') {
+  return Astro.redirect('/404');
+}
+
+const db = create_db(Astro.locals.runtime.env.DB);
+const form_data = await Astro.request.formData();
+
+const validation_result = subscription_form_schema.safeParse({
+  name: form_data.get('name'),
+  email: form_data.get('email')
+});
+
+let result: CreateSubscriptionOutput | null = null;
+if (validation_result.success) {
+  result = await create_subscription(db, validation_result.data);
+}
+---
+
+{
+  !result ? (
+    <SubscriptionForm validationError={validation_result.error!} />
+  ) : result.status === CreateSubscriptionStatus.ok ? (
+    'Subscription is created'
+  ) : result.status === CreateSubscriptionStatus.already_exists ? (
+    result.is_email_verified ? (
+      'You have already subscribed, one day you will receive an email from me!'
+    ) : (
+      'You are just one click apart, checkout your email!'
+    )
+  ) : null
+}
