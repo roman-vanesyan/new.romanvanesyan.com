@@ -1,5 +1,4 @@
 ---
-import { format, formatISO } from 'date-fns';
 import { getCollection } from 'astro:content';
 import ContentBlock from '@pages/_components/ContentBlock.astro';
 import BitPreview from '@pages/_components/BitPreview.astro';
@@ -7,6 +6,14 @@ import BitPreview from '@pages/_components/BitPreview.astro';
 const bits = await getCollection('bits');
 ---
 
-<ContentBlock heading="Bits">
+<ContentBlock heading="Latest Bits">
   {bits.map((bit) => <BitPreview bit={bit} />)}
+
+  <div class="py-4 text-xl">
+    <a href="/bits" class="text-blue-700 underline hover:no-underline"
+      >See all bits -></a
+    >
+  </div>
+
+  <div class="my-24 h-[2px] border-0 bg-stone-300"></div>
 </ContentBlock>

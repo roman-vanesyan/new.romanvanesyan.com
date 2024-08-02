@@ -1,6 +1,7 @@
 ---
 import Head from '@components/Head.astro';
 import '@root/main.css';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -12,9 +13,20 @@ interface Props {
 <html lang="en">
   <head>
     <Head title={Astro.props.title} description={Astro.props.description} />
+    <ViewTransitions />
     <slot slot="head" name="head" />
   </head>
   <body class="bg-zinc-150 flex min-h-screen flex-col">
     <slot />
+
+    <script>
+      import * as htmx from 'htmx.org';
+
+      document.addEventListener('astro:after-swap', function () {
+        htmx.process(document.body);
+      });
+
+      window.htmx = htmx;
+    </script>
   </body>
 </html>

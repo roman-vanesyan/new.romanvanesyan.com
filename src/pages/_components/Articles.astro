@@ -6,6 +6,12 @@ import ArticlePreview from '@pages/_components/ArticlePreview.astro';
 const articles = await getCollection('articles');
 ---
 
-<ContentBlock heading="Articles">
+<ContentBlock heading="Latest Articles">
   {articles.map((article) => <ArticlePreview article={article} />)}
+
+  <div class="py-4 text-xl">
+    <a href="/articles" class="text-blue-700 underline hover:no-underline"
+      >See all articles -></a
+    >
+  </div>
 </ContentBlock>

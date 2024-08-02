@@ -3,51 +3,50 @@ import { format, formatISO } from 'date-fns';
 import Layout from '@layouts/Layout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
-import GlobalNavigation from '@components/GlobalNavigation.astro';
+import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 
 interface Props {
-  article: CollectionEntry<'articles'>;
+  bit: CollectionEntry<'bits'>;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const articles = await getCollection('articles');
+  const bits = await getCollection('bits');
 
-  return articles.map((article) => ({
-    props: { article },
-    params: { slug: article.slug }
+  return bits.map((bit) => ({
+    props: { bit: bit },
+    params: { slug: bit.slug }
   }));
 };
 
-const { article } = Astro.props;
-if (!article) {
+const { bit } = Astro.props;
+if (!bit) {
   return Astro.redirect('/404');
 }
 
-const { Content, ...rest } = await article.render();
+const { Content, ...rest } = await bit.render();
 ---
 
-<Layout title={article.data.heading} description={article.data.description}>
-  <header class="m-auto flex max-w-screen-md flex-row justify-between py-12">
-    <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
-      >{'<-'} Home</a
-    >
-    <GlobalNavigation orientation="horizontal" />
+<Layout title={bit.data.heading} description={bit.data.description}>
+  <header class="m-auto max-w-screen-md">
+    <Header>
+      <div slot="left-side" class="flex-grow"></div>
+    </Header>
   </header>
   <main class="mx-auto w-full max-w-screen-md">
     <article class="w-full">
       <header class="flex w-full flex-col flex-nowrap items-center">
         <div class="m-auto mb-6">
           <time
-            datetime={formatISO(article.data.published_at)}
+            datetime={formatISO(bit.data.published_at)}
             class="text-xl text-gray-400"
           >
-            {format(article.data.published_at, 'PPP')}
+            {format(bit.data.published_at, 'PPP')}
           </time>
         </div>
         <h1 class="mb-12 text-balance font-sans text-4xl font-semibold">
-          {article.data.heading}
+          {bit.data.heading}
         </h1>
       </header>
       <div class="text-pretty font-serif text-2xl leading-relaxed">
