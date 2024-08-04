@@ -1,19 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import ContentBlock from '@pages/_components/ContentBlock.astro';
 import BitPreview from '@pages/_components/BitPreview.astro';
+import { all_bits } from '@api/tags';
 
-const bits = await getCollection('bits');
+const bits = all_bits.slice(0, 5);
 ---
 
-<ContentBlock heading="Latest Bits">
+<ContentBlock
+  heading="Latest Bits"
+  all={{ content: 'See all bits ->', href: '/bits' }}
+  orientation="horizontal"
+>
   {bits.map((bit) => <BitPreview bit={bit} />)}
-
-  <div class="py-4 text-xl">
-    <a href="/bits" class="text-blue-700 underline hover:no-underline"
-      >See all bits -></a
-    >
-  </div>
-
-  <div class="my-24 h-[2px] border-0 bg-stone-300"></div>
 </ContentBlock>

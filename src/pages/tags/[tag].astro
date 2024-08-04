@@ -1,0 +1,62 @@
+---
+import Layout from '@layouts/Layout.astro';
+import type { GetStaticPaths } from 'astro';
+import { getEntry, type CollectionEntry } from 'astro:content';
+import { all_bits, all_articles, all_tags } from '@api/tags';
+import GlobalNavigation from '@components/GlobalNavigation.astro';
+import PostPreview from '@components/PostPreview.astro';
+
+export const prerender = true;
+
+interface Props {
+  tag: string;
+  bits: Array<CollectionEntry<'bits'>>;
+  articles: Array<CollectionEntry<'articles'>>;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return all_tags.map(([tag]) => ({
+    props: {
+      tag,
+      bits: all_bits.filter(({ data }) => data.tags.includes(tag)),
+      articles: all_articles.filter(({ data }) => data.tags.includes(tag))
+    },
+    params: { tag }
+  }));
+};
+
+const { tag, bits, articles } = Astro.props;
+const posts = [...bits, ...articles];
+---
+
+<Layout title={`${tag} Topics`} description={`${tag} Topics`}>
+  <header
+    slot="header"
+    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
+  >
+    <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
+      >{'<-'} Home</a
+    >
+    <GlobalNavigation orientation="horizontal" />
+  </header>
+  <main class="m-auto flex max-w-screen-md flex-col gap-12">
+    {
+      posts.map(async (post) => {
+        const author = await getEntry(
+          post.data.authored_by.collection,
+          post.data.authored_by.id
+        );
+
+        return (
+          <PostPreview
+            url={`/${post.collection}/${post.slug}`}
+            title={post.data.heading}
+            tags={post.data.tags}
+            publishedAt={post.data.published_at}
+            author={{ id: author.id, name: author.data.name }}
+          />
+        );
+      })
+    }
+  </main>
+</Layout>

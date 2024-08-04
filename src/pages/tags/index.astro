@@ -1,0 +1,35 @@
+---
+import { all_tags } from '@api/tags';
+import Tag from '@components/Tag.astro';
+import Layout from '@layouts/Layout.astro';
+import GlobalNavigation from '@components/GlobalNavigation.astro';
+import Footer from '@components/Footer.astro';
+
+export const prerender = true;
+---
+
+<Layout title="All tags" description="">
+  <header
+    slot="header"
+    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
+  >
+    <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
+      >{'<-'} Home</a
+    >
+    <GlobalNavigation orientation="horizontal" />
+  </header>
+  <main class="mx-auto w-full max-w-screen-sm">
+    <div class="flex flex-col gap-4">
+      <h2 class="text-3xl text-stone-600">All Topics</h2>
+      <div class="flex flex-row flex-wrap gap-2">
+        {
+          all_tags.map(([tag, count]) => (
+            <Tag tag={tag} count={count} fill={true} />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer slot="footer" class="pt-12" />
+</Layout>

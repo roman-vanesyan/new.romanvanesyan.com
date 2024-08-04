@@ -3,6 +3,9 @@ compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "DB"
-database_name = "d1-romanvanesyan-com-preview-db"
-database_id = "3a75e610-f337-41a1-92e7-afbb52c3c260"
+database_name = "d1-romanvanesyan-com-db"
+database_id = "10bcc56e-f3fd-4d8d-99c5-7761f5e2b007"
+# database_name = "d1-romanvanesyan-com-preview-db"
+# database_id = "3a75e610-f337-41a1-92e7-afbb52c3c260"
+preview_database_id = "DB"
 migrations_dir = "./migrations"

@@ -1,0 +1,18 @@
+---
+interface Props {
+  tag: string;
+  count?: number;
+  fill?: boolean;
+}
+
+const { count, tag, fill = false } = Astro.props;
+---
+
+<a
+  href={`/tags/${tag}`}
+  class="inline-block text-sm leading-4 text-stone-500 underline hover:no-underline"
+  class:list={fill ? ['px-1', 'py-1', 'bg-stone-100'] : []}
+>
+  #{tag}
+  {count ? `(${count})` : null}
+</a>

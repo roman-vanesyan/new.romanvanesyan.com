@@ -1,15 +1,34 @@
 ---
 interface Props {
   heading: string;
+  orientation: 'vertical' | 'horizontal';
+  all?: {
+    content: string;
+    href: string;
+  };
 }
+
+const { all } = Astro.props;
 ---
 
 <div class="flex flex-row flex-nowrap">
   <h2 class="w-1/6 pr-8 text-right text-4xl text-stone-600">
     {Astro.props.heading}
   </h2>
-  <div class="flex flex-grow flex-col">
-    <slot />
+  <div class="flex flex-grow flex-col gap-4">
+    <div class="flex flex-col gap-12">
+      <slot />
+    </div>
+
+    {
+      all ? (
+        <div class="text-xl">
+          <a href={all.href} class="text-blue-700 underline hover:no-underline">
+            {all.content}
+          </a>
+        </div>
+      ) : null
+    }
   </div>
   <div class="w-1/6"></div>
 </div>

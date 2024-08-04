@@ -1,0 +1,51 @@
+---
+import { format, formatISO } from 'date-fns';
+import Tag from '@components/Tag.astro';
+
+interface Props {
+  url: string;
+  title: string;
+  description?: string;
+  publishedAt: Date;
+  author: {
+    id: string;
+    name: string;
+  };
+
+  tags: string[];
+}
+---
+
+<article class="flex flex-col gap-2">
+  <a
+    href={Astro.props.url}
+    class="w-fit text-blue-700 underline hover:no-underline"
+  >
+    <h3 class="font-sans text-2xl">{Astro.props.title}</h3>
+  </a>
+
+  {
+    Astro.props.description ? (
+      <div class="py-2">
+        <p class="border-l-4 border-stone-300 px-4 py-2">
+          {Astro.props.description}
+        </p>
+      </div>
+    ) : null
+  }
+
+  <div class="flex flex-col gap-1">
+    <span class="text-sm">
+      <time datetime={formatISO(Astro.props.publishedAt)}>
+        {format(Astro.props.publishedAt, 'dd/MM/y')}
+      </time>
+      by <a href={`/authors/${Astro.props.author.id}`}
+        >{Astro.props.author.name}</a
+      >
+    </span>
+
+    <div class="flex flex-row gap-2">
+      {Astro.props.tags.map((tag) => <Tag tag={tag} />)}
+    </div>
+  </div>
+</article>

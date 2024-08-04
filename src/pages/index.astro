@@ -5,10 +5,14 @@ import Bits from '@pages/_components/Bits.astro';
 import Header from '@components/Header.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
+import FrequentTags from '@pages/_components/FrequentTags.astro';
+import Divider from '@pages/_components/Divider.astro';
+
+export const prerender = true;
 ---
 
 <Layout title="Roman Vanesyan" description="">
-  <div slot="header" class="mx-auto w-full max-w-screen-lg">
+  <div slot="header" class="mx-auto w-full max-w-screen-lg px-4">
     <Header>
       <div class="flex-1 text-balance" slot="left-side">
         <h1 class="mb-4 text-4xl font-bold">Hello, I am Roman</h1>
@@ -20,9 +24,18 @@ import SubscriptionForm from '@components/SubscriptionForm.astro';
     </Header>
   </div>
 
-  <main class="mx-auto w-full max-w-screen-2xl">
+  <main class="mx-auto w-full max-w-screen-2xl px-4">
+    <div class="flex flex-row pb-12 pt-4">
+      <div class="w-1/6"></div>
+      <div class="flex flex-grow flex-col">
+        <FrequentTags />
+      </div>
+      <div class="w-1/6"></div>
+    </div>
+
     <div class="flex flex-col">
       <Bits />
+      <Divider class="mx-auto w-2/3" />
       <Articles />
     </div>
   </main>

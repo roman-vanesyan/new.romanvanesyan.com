@@ -1,27 +1,22 @@
 ---
-import { CollectionEntry } from 'astro:content';
-import { format, formatISO } from 'date-fns';
-import Tag from '@pages/_components/Tag.astro';
+import { type CollectionEntry, getEntry } from 'astro:content';
+import PostPreview from '@components/PostPreview.astro';
 
 interface Props {
   bit: CollectionEntry<'bits'>;
 }
 
 const { bit } = Astro.props;
+const author = await getEntry(
+  bit.data.authored_by.collection,
+  bit.data.authored_by.id
+);
 ---
 
-<article>
-  <a
-    href={`/bits/${bit.slug}`}
-    class="text-blue-700 underline hover:no-underline"
-  >
-    <h3 class="font-sans text-2xl">{bit.data.heading}</h3>
-  </a>
-  <time datetime={formatISO(bit.data.published_at)}>
-    {format(bit.data.published_at, 'dd/MM/y')}
-  </time>
-  by <a href={bit.data.authored_by}>{bit.data.authored_by}</a>
-  <div class="flex flex-row gap-2">
-    {bit.data.tags.map((tag) => <Tag tag={tag} />)}
-  </div>
-</article>
+<PostPreview
+  url={`/bits/${bit.slug}`}
+  title={bit.data.heading}
+  tags={bit.data.tags}
+  publishedAt={bit.data.published_at}
+  author={{ id: author.id, name: author.data.name }}
+/>

@@ -1,0 +1,11 @@
+---
+import { getEntry } from 'astro:content';
+
+const { id } = Astro.params;
+const author = await getEntry('authors', id);
+if (author) {
+  return Astro.redirect(author.data.profile_url);
+}
+
+return Astro.redirect('/404');
+---
