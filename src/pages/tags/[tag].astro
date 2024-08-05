@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import type { GetStaticPaths } from 'astro';
-import { getEntry, type CollectionEntry } from 'astro:content';
+import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
 import { all_bits, all_articles, all_tags } from '@api/tags';
 import GlobalNavigation from '@components/GlobalNavigation.astro';
 import PostPreview from '@components/PostPreview.astro';
@@ -9,19 +9,23 @@ import PostPreview from '@components/PostPreview.astro';
 export const prerender = true;
 
 interface Props {
-  tag: string;
+  tag: CollectionEntry<'tags'>;
   bits: Array<CollectionEntry<'bits'>>;
   articles: Array<CollectionEntry<'articles'>>;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return all_tags.map(([tag]) => ({
+  return all_tags.map((t) => ({
     props: {
-      tag,
-      bits: all_bits.filter(({ data }) => data.tags.includes(tag)),
-      articles: all_articles.filter(({ data }) => data.tags.includes(tag))
+      tag: t,
+      bits: all_bits.filter(({ data }) =>
+        data.tags.map((t) => t.id).includes(t.id)
+      ),
+      articles: all_articles.filter(({ data }) =>
+        data.tags.map((t) => t.id).includes(t.id)
+      )
     },
-    params: { tag }
+    params: { tag: t.id }
   }));
 };
 
@@ -29,7 +33,10 @@ const { tag, bits, articles } = Astro.props;
 const posts = [...bits, ...articles];
 ---
 
-<Layout title={`${tag} Topics`} description={`${tag} Topics`}>
+<Layout
+  title={`${tag.data.name} Topics`}
+  description={`${tag.data.name} Topics`}
+>
   <header
     slot="header"
     class="m-auto flex max-w-screen-md flex-row justify-between py-12"
@@ -51,7 +58,10 @@ const posts = [...bits, ...articles];
           <PostPreview
             url={`/${post.collection}/${post.slug}`}
             title={post.data.heading}
-            tags={post.data.tags}
+            tags={(await getEntries(post.data.tags)).map((t) => ({
+              id: t.id,
+              name: t.data.name
+            }))}
             publishedAt={post.data.published_at}
             author={{ id: author.id, name: author.data.name }}
           />

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getEntry } from 'astro:content';
+import { type CollectionEntry, getEntries, getEntry } from 'astro:content';
 import PostPreview from '@components/PostPreview.astro';
 
 interface Props {
@@ -11,12 +11,13 @@ const author = await getEntry(
   bit.data.authored_by.collection,
   bit.data.authored_by.id
 );
+const tags = await getEntries(bit.data.tags);
 ---
 
 <PostPreview
   url={`/bits/${bit.slug}`}
   title={bit.data.heading}
-  tags={bit.data.tags}
+  tags={tags.map((t) => ({ id: t.id, name: t.data.name }))}
   publishedAt={bit.data.published_at}
   author={{ id: author.id, name: author.data.name }}
 />

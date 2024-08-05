@@ -1,7 +1,5 @@
 ---
-import { getEntry, type CollectionEntry } from 'astro:content';
-import { format, formatISO } from 'date-fns';
-import Tag from '@components/Tag.astro';
+import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
 import PostPreview from '@components/PostPreview.astro';
 
 interface Props {
@@ -13,6 +11,7 @@ const author = await getEntry(
   article.data.authored_by.collection,
   article.data.authored_by.id
 );
+const tags = await getEntries(article.data.tags);
 ---
 
 <article class="bg-stone-100 p-4">
@@ -20,7 +19,7 @@ const author = await getEntry(
     url={`/articles/${article.slug}`}
     title={article.data.heading}
     description={article.data.description}
-    tags={article.data.tags}
+    tags={tags.map((t) => ({ id: t.id, name: t.data.name }))}
     publishedAt={article.data.published_at}
     author={{ id: author.id, name: author.data.name }}
   />

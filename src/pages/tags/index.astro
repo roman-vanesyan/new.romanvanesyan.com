@@ -23,8 +23,12 @@ export const prerender = true;
       <h2 class="text-3xl text-stone-600">All Topics</h2>
       <div class="flex flex-row flex-wrap gap-2">
         {
-          all_tags.map(([tag, count]) => (
-            <Tag tag={tag} count={count} fill={true} />
+          all_tags.map((t) => (
+            <Tag
+              tag={{ id: t.id, name: t.data.name }}
+              count={t.count}
+              fill={true}
+            />
           ))
         }
       </div>
