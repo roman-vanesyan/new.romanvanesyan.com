@@ -14,7 +14,7 @@ const links: Array<{ href: string; content: string }> = [
 const orientation = Astro.props.orientation ?? 'vertical';
 ---
 
-<nav class="text-2xl text-stone-400">
+<nav class="text-2xl font-bold text-stone-400">
   <ul
     class="flex gap-1"
     class:list={orientation === 'vertical'

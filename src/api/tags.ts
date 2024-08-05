@@ -7,7 +7,8 @@ export const all_articles = (await getCollection('articles')).sort((a, b) =>
 export const all_bits = (await getCollection('bits')).sort((a, b) =>
   differenceInMilliseconds(b.data.published_at, a.data.published_at)
 );
-const tags = (
+
+const seen_tags = (
   await getEntries(
     [...all_articles, ...all_bits].flatMap(({ data }) => data.tags)
   )
@@ -20,7 +21,7 @@ const tags = (
   {} as Record<string, CollectionEntry<'tags'> & { count: number }>
 );
 
-export const all_tags = Object.values(tags);
-export const top_10_freq_tags = all_tags
+export const all_seen_tags = Object.values(seen_tags);
+export const top_10_freq_tags = all_seen_tags
   .sort((l, r) => l.count - r.count)
   .slice(0, 10);

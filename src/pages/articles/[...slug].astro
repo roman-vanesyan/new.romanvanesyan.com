@@ -31,7 +31,10 @@ const { Content, ...rest } = await article.render();
 ---
 
 <Layout title={article.data.heading} description={article.data.description}>
-  <header slot="header" class="m-auto flex max-w-screen-md flex-row justify-between py-12">
+  <header
+    slot="header"
+    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
+  >
     <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
       >{'<-'} Home</a
     >
@@ -39,20 +42,22 @@ const { Content, ...rest } = await article.render();
   </header>
   <main class="mx-auto w-full max-w-screen-md">
     <article class="w-full">
-      <header class="flex w-full flex-col flex-nowrap items-center">
-        <div class="m-auto mb-6">
-          <time
-            datetime={formatISO(article.data.published_at)}
-            class="text-xl text-gray-400"
-          >
-            {format(article.data.published_at, 'PPP')}
-          </time>
-        </div>
-        <h1 class="mb-12 text-balance font-sans text-4xl font-semibold">
-          {article.data.heading}
-        </h1>
-      </header>
-      <div class="text-pretty font-serif text-2xl leading-relaxed">
+      <div
+        class="prose prose-stone prose:p-text-justify prose:headings-text-balance prose-xl font-serif"
+      >
+        <header class="flex w-full flex-col flex-nowrap items-center font-sans">
+          <div class="m-auto mb-6">
+            <time
+              datetime={formatISO(article.data.published_at)}
+              class="text-xl text-stone-400"
+            >
+              {format(article.data.published_at, 'PPP')}
+            </time>
+          </div>
+          <h1 class="mb-12">
+            {article.data.heading}
+          </h1>
+        </header>
         <Content />
       </div>
     </article>

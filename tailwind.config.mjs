@@ -1,4 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
+import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -6,10 +7,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['kazimir', ...defaultTheme.fontFamily.serif],
-        sans: ['inter-variable', ...defaultTheme.fontFamily.sans]
+        serif: ['Merriweather', ...defaultTheme.fontFamily.serif],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans]
       }
     }
   },
-  plugins: []
+  plugins: [typography]
 };
