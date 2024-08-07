@@ -1,0 +1,19 @@
+---
+import { type Node } from '@lib/create_toc';
+import SubToc from './SubToc.astro';
+
+interface Props {
+  nodes: Node[];
+  depth: number;
+}
+---
+
+<div class="not-prose my-5">
+  <ul class="m-0 list-none p-0">
+    {
+      Astro.props.nodes.map((node) => (
+        <SubToc node={node} maxDepth={Astro.props.depth} />
+      ))
+    }
+  </ul>
+</div>

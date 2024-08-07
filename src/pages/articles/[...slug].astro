@@ -1,12 +1,16 @@
 ---
 import { format, formatISO } from 'date-fns';
 import Layout from '@layouts/Layout.astro';
+import Tag from '@components/Tag.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import GlobalNavigation from '@components/GlobalNavigation.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 import Prose from '@components/Prose.astro';
+import { getEntries } from 'astro:content';
+import { create_toc } from '@lib/create_toc';
+import Toc from '@components/toc/Toc.astro';
 
 export const prerender = true;
 
@@ -28,7 +32,9 @@ if (!article) {
   return Astro.redirect('/404');
 }
 
-const { Content, ...rest } = await article.render();
+const { Content, headings } = await article.render();
+const tags = await getEntries(article.data.tags);
+const toc = create_toc(headings);
 ---
 
 <Layout title={article.data.heading} description={article.data.description}>
@@ -55,8 +61,17 @@ const { Content, ...rest } = await article.render();
           </div>
           <h1>{article.data.heading}</h1>
         </header>
+        <Toc nodes={toc} depth={3} />
         <Content />
       </Prose>
+
+      <footer class="my-4 flex flex-row gap-2">
+        {
+          tags.map((t) => (
+            <Tag tag={{ id: t.id, name: t.data.name }} fill={true} />
+          ))
+        }
+      </footer>
     </article>
   </main>
 
