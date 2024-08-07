@@ -1,5 +1,5 @@
 ---
-import { all_tags } from '@api/tags';
+import { all_seen_tags } from '@api/tags';
 import Tag from '@components/Tag.astro';
 import Layout from '@layouts/Layout.astro';
 import GlobalNavigation from '@components/GlobalNavigation.astro';
@@ -23,7 +23,7 @@ export const prerender = true;
       <h2 class="text-3xl text-stone-600">All Topics</h2>
       <div class="flex flex-row flex-wrap gap-2">
         {
-          all_tags.map((t) => (
+          all_seen_tags.map((t) => (
             <Tag
               tag={{ id: t.id, name: t.data.name }}
               count={t.count}

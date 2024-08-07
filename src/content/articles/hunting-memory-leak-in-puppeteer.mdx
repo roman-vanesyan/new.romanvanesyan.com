@@ -30,6 +30,7 @@ Remember, that we are running in a container and not having access to the host, 
 grab a PID of the Puppeteer process and grab stats for it by reading `/proc/<pid>/status`.
 
 ```js
+// hello world
 const browser = await puppeteer.launch({ headless: true });
 const { pid } = await browser.process();
 

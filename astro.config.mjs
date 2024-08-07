@@ -3,6 +3,9 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import cloudflare from '@astrojs/cloudflare';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeSlug from 'rehype-slug';
+import remarkToc from 'remark-toc';
 
 export default defineConfig({
   prefetch: true,
@@ -16,8 +19,10 @@ export default defineConfig({
     mdx()
   ],
   markdown: {
-    syntaxHighlight: 'shiki',
-    gfm: true
+    syntaxHighlight: 'prism',
+    gfm: true,
+    remarkPlugins: [[remarkToc, { heading: 'toc', maxDepth: 4 }]],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]]
   },
   adapter: cloudflare({
     platformProxy: {

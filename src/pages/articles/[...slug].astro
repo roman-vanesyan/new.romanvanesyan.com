@@ -6,6 +6,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import GlobalNavigation from '@components/GlobalNavigation.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
+import Prose from '@components/Prose.astro';
 
 export const prerender = true;
 
@@ -42,9 +43,7 @@ const { Content, ...rest } = await article.render();
   </header>
   <main class="mx-auto w-full max-w-screen-md">
     <article class="w-full">
-      <div
-        class="prose prose-stone prose:p-text-justify prose:headings-text-balance prose-xl font-serif"
-      >
+      <Prose>
         <header class="flex w-full flex-col flex-nowrap items-center font-sans">
           <div class="m-auto mb-6">
             <time
@@ -54,12 +53,10 @@ const { Content, ...rest } = await article.render();
               {format(article.data.published_at, 'PPP')}
             </time>
           </div>
-          <h1 class="mb-12">
-            {article.data.heading}
-          </h1>
+          <h1>{article.data.heading}</h1>
         </header>
         <Content />
-      </div>
+      </Prose>
     </article>
   </main>
 

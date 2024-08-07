@@ -7,8 +7,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Merriweather', ...defaultTheme.fontFamily.serif],
-        sans: ['Inter', ...defaultTheme.fontFamily.sans]
+        serif: [
+          'Merriweather',
+          'IBM Plex Serif',
+          ...defaultTheme.fontFamily.serif
+        ],
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono]
       }
     }
   },

@@ -2,7 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
-import { all_bits, all_articles, all_tags } from '@api/tags';
+import { all_bits, all_articles, all_seen_tags } from '@api/tags';
 import GlobalNavigation from '@components/GlobalNavigation.astro';
 import PostPreview from '@components/PostPreview.astro';
 
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return all_tags.map((t) => ({
+  return all_seen_tags.map((t) => ({
     props: {
       tag: t,
       bits: all_bits.filter(({ data }) =>
