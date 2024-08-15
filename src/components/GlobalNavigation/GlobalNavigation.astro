@@ -1,6 +1,9 @@
 ---
+import GlobalNavigationLink from './GlobalNavigationLink.astro';
+
 interface Props {
   orientation?: 'vertical' | 'horizontal';
+  color: 'stone' | 'slate';
 }
 
 const links: Array<{ href: string; content: string }> = [
@@ -8,25 +11,28 @@ const links: Array<{ href: string; content: string }> = [
   { href: '/bits', content: 'Bits' },
   { href: '/articles', content: 'Articles' },
   { href: '/projects', content: 'Projects' }
-  // { href: '/photography', content: 'Photography' }
 ];
 
-const orientation = Astro.props.orientation ?? 'vertical';
+const { orientation = 'vertical', color = 'stone' } = Astro.props;
 ---
 
-<nav class="text-2xl font-semibold text-stone-400">
+<nav class="w-full text-2xl font-semibold text-stone-400">
   <ul
     class="flex gap-1"
     class:list={orientation === 'vertical'
       ? 'flex-col gap-1'
       : 'flex-row gap-4'}
   >
+    <li class="mr-auto">
+      <GlobalNavigationLink href="/" color={color}>Home</GlobalNavigationLink>
+    </li>
+
     {
       links.map(({ href, content }) => (
         <li>
-          <a href={href} class="hover:text-stone-800">
+          <GlobalNavigationLink href={href} color={color}>
             {content}
-          </a>
+          </GlobalNavigationLink>
         </li>
       ))
     }

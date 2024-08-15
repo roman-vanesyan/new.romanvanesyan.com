@@ -1,9 +1,26 @@
 ---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  color: 'stone' | 'slate';
+}
 
+const { size = 'md', color } = Astro.props;
 ---
 
 <div
-  class="prose prose-xl prose-stone text-pretty font-serif prose-headings:font-sans prose-headings:font-semibold prose-pre:bg-stone-100 prose-pre:text-stone-900"
+  class="prose text-pretty font-serif prose-headings:font-sans prose-headings:font-semibold"
+  class:list={[
+    {
+      'prose-sm': size === 'sm',
+      '': size === 'md',
+      'prose-xl': size === 'lg'
+    },
+    {
+      'prose-stone prose-pre:bg-stone-100 prose-pre:text-stone-900':
+        color == 'stone',
+      'prose-slate': color == 'slate'
+    }
+  ]}
 >
   <slot />
 </div>

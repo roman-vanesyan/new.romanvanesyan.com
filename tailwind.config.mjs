@@ -6,6 +6,14 @@ export default {
   content: ['./src/**/*.{astro,md,mdx,ts,tsx}'],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%'
+          }
+        }
+      },
+
       fontFamily: {
         serif: [
           'Merriweather',

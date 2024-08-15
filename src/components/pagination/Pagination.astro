@@ -1,0 +1,39 @@
+---
+import PaginationLink from './PaginationLink.astro';
+
+interface Props {
+  totalPagesCount: number;
+  currentPageNum: number;
+
+  basePath: string;
+  next?: string;
+  prev?: string;
+}
+
+const generate_pagination = (l: number) =>
+  Array.from({ length: l }, (_, i) => i + 1);
+
+const pages = generate_pagination(Astro.props.totalPagesCount);
+---
+
+<div
+  class="m-10 flex select-none flex-row justify-between text-xl font-semibold text-stone-400"
+>
+  <PaginationLink href={Astro.props.prev} active={false}>{'<-'}</PaginationLink>
+  <ul class="flex flex-row">
+    {
+      pages.map((p) => (
+        <li>
+          <PaginationLink
+            active={p === Astro.props.currentPageNum}
+            href={`${Astro.props.basePath}/${p}`}
+          >
+            {p}
+          </PaginationLink>
+        </li>
+      ))
+    }
+  </ul>
+
+  <PaginationLink href={Astro.props.next} active={false}>{'->'}</PaginationLink>
+</div>

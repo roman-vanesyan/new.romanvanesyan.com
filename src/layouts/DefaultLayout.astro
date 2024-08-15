@@ -1,0 +1,26 @@
+---
+import Footer from '@components/Footer.astro';
+import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
+import Layout, { type Props as LayoutProps } from '@layouts/Layout.astro';
+
+interface Props extends LayoutProps {}
+
+const { ...rest } = Astro.props;
+---
+
+<Layout {...rest}>
+  <header
+    slot="header"
+    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
+  >
+    <GlobalNavigation orientation="horizontal" />
+  </header>
+
+  <main class="mx-auto flex w-full max-w-screen-md flex-grow flex-col">
+    <slot />
+  </main>
+
+  <Footer slot="footer">
+    <slot name="footer-top" slot="footer-top" />
+  </Footer>
+</Layout>

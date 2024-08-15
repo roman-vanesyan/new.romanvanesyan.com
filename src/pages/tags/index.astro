@@ -1,39 +1,28 @@
 ---
 import { all_seen_tags } from '@api/tags';
 import Tag from '@components/Tag.astro';
-import Layout from '@layouts/Layout.astro';
-import GlobalNavigation from '@components/GlobalNavigation.astro';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
 import Footer from '@components/Footer.astro';
 
 export const prerender = true;
 ---
 
-<Layout title="All tags" description="">
-  <header
-    slot="header"
-    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
-  >
-    <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
-      >{'<-'} Home</a
-    >
-    <GlobalNavigation orientation="horizontal" />
-  </header>
-  <main class="mx-auto w-full max-w-screen-sm">
-    <div class="flex flex-col gap-4">
-      <h2 class="text-3xl text-stone-600">All Topics</h2>
-      <div class="flex flex-row flex-wrap gap-2">
-        {
-          all_seen_tags.map((t) => (
-            <Tag
-              tag={{ id: t.id, name: t.data.name }}
-              count={t.count}
-              fill={true}
-            />
-          ))
-        }
-      </div>
+<DefaultLayout title="All tags" description="">
+  <div class="flex flex-col gap-4">
+    <h1 class="text-3xl text-stone-600">All Topics</h1>
+    <div class="flex flex-row flex-wrap gap-2">
+      {
+        all_seen_tags.map((t) => (
+          <Tag
+            tag={{ id: t.id, name: t.data.name }}
+            count={t.count}
+            fill={true}
+          />
+        ))
+      }
     </div>
-  </main>
+  </div>
 
   <Footer slot="footer" class="pt-12" />
-</Layout>
+</DefaultLayout>

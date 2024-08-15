@@ -6,6 +6,7 @@ import { ViewTransitions } from 'astro:transitions';
 interface Props {
   title: string;
   description: string;
+  class: string;
 }
 ---
 
@@ -16,7 +17,10 @@ interface Props {
     <ViewTransitions />
     <slot slot="head" name="head" />
   </head>
-  <body class="bg-zinc-150 flex min-h-screen flex-col">
+  <body
+    class="bg-zinc-150 flex min-h-screen flex-col"
+    class:list={Astro.props.class}
+  >
     <slot />
 
     <script>

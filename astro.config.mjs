@@ -30,6 +30,7 @@ export default defineConfig({
 
   redirects: {
     '/github': 'https://github.com/roman-vanesyan',
-    '/x': 'https://x.com/roman_vanesyan'
+    '/x': 'https://x.com/roman_vanesyan',
+    '/linkedin': 'https://www.linkedin.com/in/roman-vanesyan/'
   }
 });

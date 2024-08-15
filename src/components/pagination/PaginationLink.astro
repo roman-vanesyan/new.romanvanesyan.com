@@ -1,0 +1,27 @@
+---
+interface Props {
+  href?: string;
+  active: boolean;
+}
+---
+
+{
+  !Astro.props.href || Astro.props.active ? (
+    <span
+      class="block"
+      class:list={{
+        'text-stone-600': Astro.props.active,
+        'text-stone-300': !Astro.props.href
+      }}
+    >
+      <slot />
+    </span>
+  ) : (
+    <a
+      href={Astro.props.href}
+      class="block text-stone-400 hover:text-stone-800"
+    >
+      <slot />
+    </a>
+  )
+}

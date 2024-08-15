@@ -1,9 +1,9 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
 import { all_bits, all_articles, all_seen_tags } from '@api/tags';
-import GlobalNavigation from '@components/GlobalNavigation.astro';
+import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
 import PostPreview from '@components/PostPreview.astro';
 
 export const prerender = true;
@@ -33,20 +33,17 @@ const { tag, bits, articles } = Astro.props;
 const posts = [...bits, ...articles];
 ---
 
-<Layout
+<DefaultLayout
   title={`${tag.data.name} Topics`}
   description={`${tag.data.name} Topics`}
 >
-  <header
-    slot="header"
-    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
-  >
-    <a href="/" class="text-2xl font-bold text-stone-400 hover:text-stone-800"
-      >{'<-'} Home</a
-    >
-    <GlobalNavigation orientation="horizontal" />
-  </header>
-  <main class="m-auto flex max-w-screen-md flex-col gap-12">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-row items-end gap-4">
+      <h1 class="text-3xl text-stone-600">{tag.data.name} Topics</h1>
+      <a href="/tags" class="block text-stone-500 underline hover:no-underline">
+        All topics {'->'}
+      </a>
+    </div>
     {
       posts.map(async (post) => {
         const author = await getEntry(
@@ -68,5 +65,5 @@ const posts = [...bits, ...articles];
         );
       })
     }
-  </main>
-</Layout>
+  </div>
+</DefaultLayout>

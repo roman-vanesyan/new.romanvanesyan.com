@@ -2,19 +2,20 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 
 export interface Props {
+  class: string;
   title: string;
   description: string;
 }
 ---
 
-<BaseLayout title={Astro.props.title} description={Astro.props.description}>
+<BaseLayout {...Astro.props}>
   <slot name="head" />
 
   <header>
     <slot name="header" />
   </header>
 
-  <div class="flex-grow">
+  <div class="flex flex-grow flex-col">
     <slot />
   </div>
 

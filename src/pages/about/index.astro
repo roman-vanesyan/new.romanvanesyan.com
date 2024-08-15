@@ -1,0 +1,144 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Prose from '@components/Prose.astro';
+import Footer from '@components/Footer.astro';
+import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
+import { Image } from 'astro:assets';
+import Column from './_components/Column.astro';
+import avatar from './_images/avatar.jpeg';
+
+export const prerender = true;
+---
+
+<Layout title="Roman Vanesyan" description="" class="bg-sky-200">
+  <main class="mx-auto w-full max-w-screen-lg px-4">
+    <div class="w-full">
+      <div class="flex flex-row gap-16 pb-12 pt-6">
+        <div class="flex-1">
+          <div class="w-2/3">
+            <Prose size="lg" color="slate">
+              <section>
+                <h1 class="mb-4 text-4xl !font-bold">Hey, I am Roman</h1>
+                <div class="font-sans font-semibold">
+                  <p>
+                    I'm a software engineer, where programming has turned out to
+                    be both my passion and my career.
+                  </p>
+
+                  <p>
+                    I've spent the last few years at
+                    <a href="https://bolt.eu/">Bolt</a>, working on the billing
+                    platform. Prior to that, I was a part of a small, dedicated
+                    team working on the CI service.
+                    <br />
+                    Checkout my <a href="/linkedin"
+                      >LinkedIn for more details {'->'}</a
+                    >
+                  </p>
+
+                  <p>
+                    In my spare time, you'll find me tinkering with various
+                    software engineering projects, creating frameworks and apps
+                    that might never see the light of day.
+                    <br />
+                    Feel free to check out the <a href="/projects"
+                      >ones that did survive {'->'}</a
+                    >
+                  </p>
+                </div>
+              </section>
+            </Prose>
+          </div>
+        </div>
+        <div>
+          <GlobalNavigation orientation="vertical" color="slate" />
+        </div>
+      </div>
+    </div>
+
+    <Prose size="md" color="slate">
+      <div class="-m-5 flex flex-row flex-wrap">
+        <Column title="Engineering" class="w-1/2">
+          <p>
+            Having written code days and nights, I believe simplicity is the key
+            to building complex yet maintainable software. However, achieving
+            simplicity in complexity requires a vast skill set and a deep
+            understanding of the fundamentals.
+            <br />
+            I'm quite a fun of nowdays (2024) trends of turning back to the fundamentals,
+            reducing complexity where it is not needed.
+          </p>
+          <h3>Programming</h3>
+          <p>
+            I’m convinced that type-safe programming languages with powerful
+            static analysis are the future. While TypeScript is a step up from
+            JavaScript, <a
+              href="https://news.dartlang.org/2012/02/tech-preview-of-chromium-with-dart-vm.html"
+              target="_blank">it would be even better if Dart replaced it</a
+            >.
+          </p>
+          <p>
+            I also believe in choosing the right tools for the right tasks. That
+            said, I genuinely think Go is one of the best programming languages
+            out there. Its commitment to simplicity allows it to conceal complex
+            concepts behind straightforward abstractions. It feels like the
+            authors made the right decision at every turn when designing the
+            language.
+          </p>
+        </Column>
+        <Column title="Life" class="w-1/2">
+          <p>
+            Despite spending days and nights programming, I do have a life
+            outside of coding. I hit the gym pretty frequently. My deadlift is
+            160kg (352 lbs), bench press is 120kg (265 lbs), and squats are
+            150kg (331 lbs).
+          </p>
+          <p>
+            I'm also an occasional amateur photographer, practicing street
+            photography. Feel free to check out my shots on the
+            <a href="/photography">photography</a> page.
+          </p>
+        </Column>
+
+        <Column title="This website">
+          <p>
+            This website is the only one that finally made it out of many
+            attempts to create a personal page over the past few years. Before
+            getting it done, I started from scratch more than 10 times and even
+            bought three different domains.
+          </p>
+
+          <p>
+            I drew a lot of inspiration from the personal pages of
+            <a href="https://brandur.org/" target="_blank">Brandur Leach</a>
+            and <a href="https://rsms.me/" target="_blank">Rasmus</a> when building
+            this site. I borrowed the content organization from Brandur's site, while
+            the design was influenced by Rasmus's.
+          </p>
+
+          <h3 class="capitalize">Content organization</h3>
+          <p>
+            The write-ups on this site are organized into two categories:
+            <a href="/bits">bits</a> — short-form notes that don’t quite warrant
+            a full article and
+            <a href="/articles">articles</a>, which are more in-depth, long-read
+            explorations of various topics. Splitting content this way has made
+            it easier for me to publish more frequently.
+          </p>
+
+          <h3>Technology</h3>
+          <p>
+            This website is built with a mix of HTML and CSS, powered by Astro,
+            with dynamic elements handled by HTMX. The design is fully
+            implemented using Tailwind. Images are stored on R2, an
+            S3-compatible storage by Cloudflare. The site is also hosted on
+            Cloudflare and is automatically deployed via CI whenever code is
+            pushed to the main branch on GitHub.
+          </p>
+        </Column>
+      </div>
+    </Prose>
+
+    <Footer slot="footer" class="pt-12" />
+  </main>
+</Layout>

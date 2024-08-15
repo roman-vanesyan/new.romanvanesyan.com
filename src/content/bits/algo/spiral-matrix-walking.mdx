@@ -1,0 +1,46 @@
+---
+heading: Matrix spiral walking algorithm
+status: published
+published_at: 2024-08-10
+tags: ['leetcode', 'algorithm', 'matrix']
+authored_by: roman-vanesyan
+
+leetcode_url: https://leetcode.com/explore/learn/card/array-and-string/202/introduction-to-2d-array/1168/
+---
+
+Recently, I’ve started to be active at solving LeetCode problems.
+For those how isn’t aware of the LeetCode platform,
+the platform provides a training environment
+with a wide range of algorithmic problems to improve problem-solving skills.
+
+As I’ve just started blowing away dust from my algorithmic skills, I go through a range of classic problems.
+One such classic, yet interesting, problem is spiral matrix traversal.
+
+## The statement
+
+You're given a two-dimensional matrix. Starting at the `(0,0)` you need to traverse all elements of the matrix in spiral order (clockwise).
+
+##
+
+### First step
+
+Let's define our directions first. Looking at the example:
+
+-- TODO: example
+
+we need to move in four direcations: to the right, down, to the left and up.
+
+Let's define our current position in the matrix as `(r, c)`, where `r` is the current row and `c` is the current column we are at.
+Starting at `(r, c)` to go to the next element on the right, i.e. at the `(r, c+1)` we need to increment our position by `(0, 1)`.
+Similar, to get the immediate element below, we need to increment by `(1, 0)`.
+
+Fast-forward, here is the table of all deltas to move in all 4 directions:
+
+| Right  | Down   | Left    | Up      |
+| ------ | ------ | ------- | ------- |
+| (0, 1) | (1, 0) | (0, -1) | (-1, 0) |
+
+Let's define our boundaries on the first step.
+
+We are starting at the position `(0, 0)` and going to the top-rightmost element `(m-1, 0)` of the matrix. To get there, we need to incrementally go through all
+preceding `m-1` elements, until we reach the top-rightmost one.

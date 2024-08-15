@@ -1,0 +1,53 @@
+---
+import { all_articles } from '@api/tags';
+import { getEntry, getEntries } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import PostPreview from '@components/PostPreview.astro';
+import Pagination from '@components/pagination/Pagination.astro';
+
+export const prerender = true;
+
+export const getStaticPaths = (({ paginate }) => {
+  return paginate(all_articles, { pageSize: 5 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const articles = page.data;
+---
+
+<DefaultLayout title={`Articles`} description={`Articles`}>
+  <div class="flex flex-grow flex-col">
+    <div class="flex-grow">
+      {
+        articles.map(async (post) => {
+          const author = await getEntry(
+            post.data.authored_by.collection,
+            post.data.authored_by.id
+          );
+
+          return (
+            <PostPreview
+              url={`/${post.collection}/${post.slug}`}
+              title={post.data.heading}
+              tags={(await getEntries(post.data.tags)).map((t) => ({
+                id: t.id,
+                name: t.data.name
+              }))}
+              publishedAt={post.data.published_at}
+              author={{ id: author.id, name: author.data.name }}
+            />
+          );
+        })
+      }
+    </div>
+
+    <Pagination
+      basePath="/articles"
+      currentPageNum={page.currentPage}
+      totalPagesCount={page.lastPage}
+      next={page.url.next}
+      prev={page.url.prev}
+    />
+  </div>
+</DefaultLayout>

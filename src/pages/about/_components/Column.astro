@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  class?: string;
+}
+---
+
+<div class="px-5" class:list={Astro.props.class}>
+  <h2 class="border-b-2 border-[color:var(--tw-prose-headings)] capitalize">
+    {Astro.props.title}
+  </h2>
+  <section>
+    <slot />
+  </section>
+</div>

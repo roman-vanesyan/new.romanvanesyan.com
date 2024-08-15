@@ -1,10 +1,9 @@
 ---
 import { format, formatISO } from 'date-fns';
-import Layout from '@layouts/Layout.astro';
+import DefaultLayout from '@layouts/DefaultLayout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
-import Header from '@components/Header.astro';
-import Footer from '@components/Footer.astro';
+import Prose from '@components/Prose.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 
 export const prerender = true;
@@ -30,14 +29,9 @@ if (!bit) {
 const { Content, ...rest } = await bit.render();
 ---
 
-<Layout title={bit.data.heading} description={bit.data.description}>
-  <header class="m-auto max-w-screen-md">
-    <Header>
-      <div slot="left-side" class="flex-grow"></div>
-    </Header>
-  </header>
-  <main class="mx-auto w-full max-w-screen-md">
-    <article class="w-full">
+<DefaultLayout title={bit.data.heading} description={bit.data.description}>
+  <article class="w-full">
+    <Prose>
       <header class="flex w-full flex-col flex-nowrap items-center">
         <div class="m-auto mb-6">
           <time
@@ -54,15 +48,10 @@ const { Content, ...rest } = await bit.render();
       <div class="text-pretty font-serif text-2xl leading-relaxed">
         <Content />
       </div>
-    </article>
-  </main>
+    </Prose>
+  </article>
 
-  <Footer slot="footer" class="w-full max-w-screen-md pt-12">
-    <div
-      class="mx-auto max-w-screen-sm rounded-lg bg-stone-100 p-6"
-      slot="footer-top"
-    >
-      <SubscriptionForm />
-    </div>
-  </Footer>
-</Layout>
+  <div class="mx-auto max-w-screen-sm rounded-lg bg-stone-100 p-6">
+    <SubscriptionForm />
+  </div>
+</DefaultLayout>
