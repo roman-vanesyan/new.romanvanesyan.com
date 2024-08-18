@@ -6,6 +6,7 @@ const bits = defineCollection({
     status: z.enum(['draft', 'published', 'hidden']),
     tags: z.array(reference('tags')),
     heading: z.string(),
+    description: z.string(),
     published_at: z.date(),
     authored_by: reference('authors')
   })

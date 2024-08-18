@@ -6,15 +6,23 @@ interface Props {
   };
   count?: number;
   fill?: boolean;
+  size: 'sm' | 'md' | 'lg';
 }
 
-const { count, tag, fill = false } = Astro.props;
+const { count, tag, size = 'sm', fill = false } = Astro.props;
 ---
 
 <a
   href={`/tags/${tag.id}`}
-  class="inline-block text-sm leading-4 text-stone-500 underline hover:no-underline"
-  class:list={fill ? ['px-1', 'py-1', 'bg-stone-100'] : []}
+  class:list={[
+    'inline-block font-sans leading-4 text-stone-500 underline hover:no-underline',
+    fill ? ['px-1', 'py-1', 'bg-stone-100'] : [],
+    {
+      'text-sm': size === 'sm',
+      'text-base': size === 'md',
+      'text-lg': size === 'lg'
+    }
+  ]}
 >
   {tag.name}
   {count ? `(${count})` : null}

@@ -2,9 +2,12 @@
 import { format, formatISO } from 'date-fns';
 import DefaultLayout from '@layouts/DefaultLayout.astro';
 import type { GetStaticPaths } from 'astro';
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry, getEntries } from 'astro:content';
 import Prose from '@components/Prose.astro';
+import Tag from '@components/Tag.astro';
+import Toc from '@components/toc/Toc.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
+import { create_toc } from '@lib/create_toc';
 
 export const prerender = true;
 
@@ -26,29 +29,65 @@ if (!bit) {
   return Astro.redirect('/404');
 }
 
-const { Content, ...rest } = await bit.render();
+const { Content, headings } = await bit.render();
+const tags = await getEntries(bit.data.tags);
+const toc = create_toc(headings);
 ---
 
-<DefaultLayout title={bit.data.heading} description={bit.data.description}>
-  <article class="w-full">
-    <Prose>
-      <header class="flex w-full flex-col flex-nowrap items-center">
-        <div class="m-auto mb-6">
-          <time
-            datetime={formatISO(bit.data.published_at)}
-            class="text-xl text-gray-400"
-          >
-            {format(bit.data.published_at, 'PPP')}
-          </time>
+<DefaultLayout
+  title={bit.data.heading}
+  description={bit.data.description}
+  contentSize="xl"
+  subContentSize="md"
+>
+  <article>
+    <header class="mx-auto max-w-screen-md">
+      <Prose size="lg">
+        <div class="flex w-full flex-col flex-nowrap items-center">
+          <div class="m-auto mb-6">
+            <time
+              datetime={formatISO(bit.data.published_at)}
+              class="text-xl text-stone-400"
+            >
+              {format(bit.data.published_at, 'PPP')}
+            </time>
+          </div>
+          <h1 class="mb-12 text-balance font-sans text-4xl font-semibold">
+            {bit.data.heading}
+          </h1>
         </div>
-        <h1 class="mb-12 text-balance font-sans text-4xl font-semibold">
-          {bit.data.heading}
-        </h1>
-      </header>
-      <div class="text-pretty font-serif text-2xl leading-relaxed">
-        <Content />
+      </Prose>
+    </header>
+
+    <div class="flex flex-row gap-4">
+      <div class="flex-1"></div>
+      <div class="w-full max-w-screen-md">
+        <Prose size="lg">
+          <Content />
+        </Prose>
+
+        <footer class="my-10 flex flex-row gap-2">
+          {
+            tags.map((t) => (
+              <Tag
+                tag={{ id: t.id, name: t.data.name }}
+                fill={true}
+                size="md"
+              />
+            ))
+          }
+        </footer>
       </div>
-    </Prose>
+
+      <aside class="flex-1">
+        <div class="sticky top-0">
+          <h2 class="mb-2 text-lg font-semibold">On this page</h2>
+          <div class="text-stone-500">
+            <Toc nodes={toc} depth={3} />
+          </div>
+        </div>
+      </aside>
+    </div>
   </article>
 
   <div class="mx-auto max-w-screen-sm rounded-lg bg-stone-100 p-6">

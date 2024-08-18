@@ -20,7 +20,18 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: 'prism',
     gfm: true,
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]]
+    rehypePlugins: [
+      rehypeSlug,
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: 'wrap',
+          properties: {
+            class: 'no-underline hover:bg-stone-100 rounded inline-block px-1'
+          }
+        }
+      ]
+    ]
   },
   adapter: cloudflare({
     platformProxy: {

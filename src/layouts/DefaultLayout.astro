@@ -3,24 +3,41 @@ import Footer from '@components/Footer.astro';
 import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
 import Layout, { type Props as LayoutProps } from '@layouts/Layout.astro';
 
-interface Props extends LayoutProps {}
+type Size = 'sm' | 'md' | 'lg' | 'xl';
 
-const { ...rest } = Astro.props;
+interface Props extends LayoutProps {
+  contentSize?: Size;
+  subContentSize?: Size;
+}
+
+const content_size = Astro.props.contentSize ?? 'md';
+const { subContentSize: sub_content_size = content_size, ...rest } =
+  Astro.props;
+const size = {
+  'sm': 'max-w-screen-sm',
+  'md': 'max-w-screen-md',
+  'lg': 'max-w-screen-lg',
+  'xl': 'max-w-screen-xl'
+};
+
+const cs = size[content_size];
+const scs = size[sub_content_size ?? content_size];
 ---
 
 <Layout {...rest}>
   <header
     slot="header"
-    class="m-auto flex max-w-screen-md flex-row justify-between py-12"
+    class="m-auto flex flex-row justify-between py-12"
+    class:list={[scs]}
   >
     <GlobalNavigation orientation="horizontal" />
   </header>
 
-  <main class="mx-auto flex w-full max-w-screen-md flex-grow flex-col">
+  <main class="mx-auto flex w-full flex-grow flex-col" class:list={[cs]}>
     <slot />
   </main>
 
-  <Footer slot="footer">
+  <Footer slot="footer" class:list={scs}>
     <slot name="footer-top" slot="footer-top" />
   </Footer>
 </Layout>

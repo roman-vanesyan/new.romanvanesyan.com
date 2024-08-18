@@ -10,7 +10,9 @@ const { node } = Astro.props;
 ---
 
 <li class="my-1">
-  <a class="underline hover:no-underline" href={`#${node.slug}`}>{node.text}</a>
+  <a class="text-inherit no-underline hover:underline" href={`#${node.slug}`}
+    >{node.text}</a
+  >
   {
     node.depth < Astro.props.maxDepth && node.children.length > 0 ? (
       <ul class="my-1 list-none pl-6">
