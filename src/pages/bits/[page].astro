@@ -1,5 +1,5 @@
 ---
-import { all_articles } from '@api/tags';
+import { all_bits } from '@api/tags';
 import { getEntry, getEntries } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import PostListLayout from '@pages/_layouts/PostListLayout.astro';
@@ -7,29 +7,29 @@ import PostListLayout from '@pages/_layouts/PostListLayout.astro';
 export const prerender = true;
 
 export const getStaticPaths = (({ paginate }) => {
-  return paginate(all_articles, { pageSize: 5 });
+  return paginate(all_bits, { pageSize: 5 });
 }) satisfies GetStaticPaths;
 
 const { page } = Astro.props;
 const posts = await Promise.all(
-  page.data.map(async (article) => {
+  page.data.map(async (bit) => {
     return {
-      author: await getEntry(article.data.authored_by),
-      tags: await getEntries(article.data.tags),
-      publishedAt: article.data.published_at,
-      description: article.data.description,
-      heading: article.data.heading,
-      slug: article.slug,
-      collection: article.collection
+      author: await getEntry(bit.data.authored_by),
+      tags: await getEntries(bit.data.tags),
+      publishedAt: bit.data.published_at,
+      description: bit.data.description,
+      heading: bit.data.heading,
+      slug: bit.slug,
+      collection: bit.collection
     };
   })
 );
 ---
 
 <PostListLayout
-  title="Articles"
-  description="A collection of articles"
-  baseUrl="/articles"
+  title="Bits"
+  description="A collection of bits"
+  baseUrl="/bits"
   page={{
     total_pages_count: page.lastPage,
     next_url: page.url.next,

@@ -1,0 +1,35 @@
+---
+import { formatISO } from 'date-fns';
+
+interface Props {
+  heading: string;
+  tags: string[];
+  description: string;
+  publishedAt: Date;
+  author: {
+    name: string;
+    url: string;
+  };
+}
+
+const schema = {
+  '@context': 'https://schema.org/',
+  '@type': 'BlogPosting',
+  '@id': Astro.props.id,
+  'headline': Astro.props.heading,
+  'description': Astro.props.description,
+  'author': {
+    '@type': 'Person',
+    'name': Astro.props.author.name,
+    'url': Astro.props.author.url
+  },
+  'datePublished': formatISO(Astro.props.publishedAt),
+  'keywords': Astro.props.tags,
+  'isPartOf': {
+    '@type': 'Blog',
+    '@id': Astro.site
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

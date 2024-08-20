@@ -1,10 +1,10 @@
 ---
 interface Props {
   size?: 'sm' | 'md' | 'lg';
-  color: 'stone' | 'slate';
+  color?: 'stone' | 'slate';
 }
 
-const { size = 'md', color } = Astro.props;
+const { size = 'md', color = 'stone' } = Astro.props;
 ---
 
 <div

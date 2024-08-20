@@ -3,15 +3,13 @@ import Layout from '@layouts/Layout.astro';
 import Prose from '@components/Prose.astro';
 import Footer from '@components/Footer.astro';
 import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
-import { Image } from 'astro:assets';
-import Column from './_components/Column.astro';
-import avatar from './_images/avatar.jpeg';
+import Section from './_components/Section.astro';
 
 export const prerender = true;
 ---
 
 <Layout title="Roman Vanesyan" description="" class="bg-sky-200">
-  <main class="mx-auto w-full max-w-screen-lg px-4">
+  <main class="mx-auto w-full max-w-screen-lg">
     <div class="w-full">
       <div class="flex flex-row gap-16 pb-12 pt-6">
         <div class="flex-1">
@@ -58,7 +56,7 @@ export const prerender = true;
 
     <Prose size="md" color="slate">
       <div class="-m-5 flex flex-row flex-wrap">
-        <Column title="Engineering" class="w-1/2">
+        <Section title="Engineering" class="w-1/2">
           <p>
             Having written code days and nights, I believe simplicity is the key
             to building complex yet maintainable software. However, achieving
@@ -85,22 +83,21 @@ export const prerender = true;
             authors made the right decision at every turn when designing the
             language.
           </p>
-        </Column>
-        <Column title="Life" class="w-1/2">
-          <p>
-            Despite spending days and nights programming, I do have a life
-            outside of coding. I hit the gym pretty frequently. My deadlift is
-            160kg (352 lbs), bench press is 120kg (265 lbs), and squats are
-            150kg (331 lbs).
-          </p>
-          <p>
-            I'm also an occasional amateur photographer, practicing street
-            photography. Feel free to check out my shots on the
-            <a href="/photography">photography</a> page.
-          </p>
-        </Column>
+        </Section>
+        <div class="w-1/2">
+          <Section title="Tools"> I use </Section>
+          <Section title="Life">
+            <p>
+              Despite spending days and nights programming, I do have a hobby
+              outside of coding. I'm also an occasional amateur photographer,
+              practicing street photography. Feel free to check out my shots on
+              the
+              <a href="/photography">photography</a> page.
+            </p>
+          </Section>
+        </div>
 
-        <Column title="This website">
+        <Section title="This website">
           <p>
             This website is the only one that finally made it out of many
             attempts to create a personal page over the past few years. Before
@@ -135,7 +132,7 @@ export const prerender = true;
             Cloudflare and is automatically deployed via CI whenever code is
             pushed to the main branch on GitHub.
           </p>
-        </Column>
+        </Section>
       </div>
     </Prose>
 

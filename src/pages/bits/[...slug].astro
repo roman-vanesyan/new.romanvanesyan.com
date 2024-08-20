@@ -2,7 +2,13 @@
 import { format, formatISO } from 'date-fns';
 import DefaultLayout from '@layouts/DefaultLayout.astro';
 import type { GetStaticPaths } from 'astro';
-import { getCollection, type CollectionEntry, getEntries } from 'astro:content';
+import {
+  getCollection,
+  type CollectionEntry,
+  getEntries,
+  getEntry
+} from 'astro:content';
+import BlogPostingSchema from '@components/schema/BlogPostingSchema.astro';
 import Prose from '@components/Prose.astro';
 import Tag from '@components/Tag.astro';
 import Toc from '@components/toc/Toc.astro';
@@ -31,6 +37,7 @@ if (!bit) {
 
 const { Content, headings } = await bit.render();
 const tags = await getEntries(bit.data.tags);
+const author = await getEntry(bit.data.authored_by);
 const toc = create_toc(headings);
 ---
 
@@ -89,6 +96,14 @@ const toc = create_toc(headings);
       </aside>
     </div>
   </article>
+
+  <BlogPostingSchema
+    heading={bit.data.heading}
+    description={bit.data.description}
+    publishedAt={bit.data.published_at}
+    tags={tags.map((t) => t.data.name)}
+    author={{ name: author.data.name, url: author.data.profile_url }}
+  />
 
   <div class="mx-auto max-w-screen-sm rounded-lg bg-stone-100 p-6">
     <SubscriptionForm />

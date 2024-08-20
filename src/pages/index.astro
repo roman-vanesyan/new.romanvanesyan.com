@@ -2,29 +2,23 @@
 import Layout from '@layouts/Layout.astro';
 import Articles from '@pages/_components/Articles.astro';
 import Bits from '@pages/_components/Bits.astro';
-import Header from '@components/Header.astro';
+import Header from '@pages/_components/forefront/Header.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 import FrequentTags from '@pages/_components/FrequentTags.astro';
 import Divider from '@pages/_components/Divider.astro';
-import Prose from '@components/Prose.astro';
 
 export const prerender = true;
 ---
 
 <Layout title="Roman Vanesyan" description="">
-  <div slot="header" class="mx-auto w-full max-w-screen-lg px-4">
-    <Header>
-      <div class="flex-1" slot="left-side">
-        <div class="w-2/3">
-          <Prose color="stone" size="lg">
-            <h1 class="mb-4 text-4xl !font-bold">Hey, I am Roman</h1>
-            <p class="font-sans font-semibold">
-              Here I most often talk about efficient software, productivity
-              tooling, code abstractions, and photography.
-            </p>
-          </Prose>
-        </div>
+  <div slot="header" class="mx-auto w-full max-w-screen-lg">
+    <Header heading="Hey, I am Roman">
+      <div slot="subheading">
+        <p class="font-sans font-semibold">
+          Here I most often talk about efficient software, productivity tooling,
+          code abstractions, and photography.
+        </p>
       </div>
     </Header>
   </div>

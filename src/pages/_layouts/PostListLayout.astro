@@ -1,0 +1,68 @@
+---
+import { type CollectionEntry } from 'astro:content';
+import Footer from '@components/Footer.astro';
+import Header from '@pages/_components/forefront/Header.astro';
+import Layout, { type Props as LayoutProps } from '@layouts/Layout.astro';
+import PostPreview from '@components/PostPreview.astro';
+import Pagination from '@components/pagination/Pagination.astro';
+
+interface Post {
+  collection: string;
+  slug: string;
+  author: CollectionEntry<'authors'>;
+  tags: CollectionEntry<'tags'>[];
+  publishedAt: Date;
+  heading: string;
+  description: string;
+}
+
+interface Props extends LayoutProps {
+  posts: Post[];
+  baseUrl: string;
+  page: {
+    current_page_num: number;
+    next_url: string | undefined;
+    prev_url: string | undefined;
+    total_pages_count: number;
+  };
+}
+
+const { posts, page, baseUrl, ...rest } = Astro.props;
+---
+
+<Layout {...rest}>
+  <div slot="header" class="mx-auto w-full max-w-screen-lg">
+    <Header heading={Astro.props.title}>
+      <div slot="subheading">
+        <slot name="subheading" />
+      </div>
+    </Header>
+  </div>
+  <main class="mx-auto flex w-full max-w-screen-lg flex-grow flex-col">
+    <div class="flex flex-grow flex-col">
+      <div class="flex flex-grow flex-col gap-12">
+        {
+          posts.map((post) => (
+            <PostPreview
+              url={`${Astro.props.baseUrl}/${post.slug}`}
+              title={post.heading}
+              tags={post.tags.map((t) => ({ id: t.id, name: t.data.name }))}
+              publishedAt={post.publishedAt}
+              author={{ id: post.author.id, name: post.author.data.name }}
+            />
+          ))
+        }
+      </div>
+
+      <Pagination
+        basePath={`${Astro.props.baseUrl}`}
+        currentPageNum={page.current_page_num}
+        totalPagesCount={page.total_pages_count}
+        next={page.next_url}
+        prev={page.prev_url}
+      />
+    </div>
+  </main>
+
+  <Footer slot="footer" class="max-w-screen-lg" />
+</Layout>
