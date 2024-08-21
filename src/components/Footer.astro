@@ -12,13 +12,13 @@ const links: Array<{ href: string; id: string }> = [
 const { class: class_names, ...rest } = Astro.props;
 ---
 
-<div slot="footer" class:list={['mx-auto', class_names]} {...rest}>
+<div slot="footer" class:list={['mx-auto mt-16', class_names]} {...rest}>
   <slot name="footer-top" />
   <div
-    class="mx-auto mb-5 mt-20 flex max-w-screen-xl flex-row flex-nowrap justify-between"
+    class="mx-auto my-4 flex max-w-screen-xl flex-row flex-nowrap items-center justify-between"
   >
     <div>
-      <span>
+      <span class="font-semibold">
         © {format(new Date(), 'y')} Roman Vanesyan
       </span>
     </div>

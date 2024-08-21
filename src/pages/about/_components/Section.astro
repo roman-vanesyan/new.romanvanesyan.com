@@ -1,13 +1,16 @@
 ---
-interface Props {
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'div'> {
   title: string;
-  class?: string;
 }
+
+const { title, ...rest } = Astro.props;
 ---
 
-<div class="px-5" class:list={Astro.props.class}>
+<div {...rest}>
   <h2 class="border-b-2 border-[color:var(--tw-prose-headings)] capitalize">
-    {Astro.props.title}
+    {title}
   </h2>
   <section>
     <slot />

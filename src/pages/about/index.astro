@@ -55,8 +55,8 @@ export const prerender = true;
     </div>
 
     <Prose size="md" color="slate">
-      <div class="-m-5 flex flex-row flex-wrap">
-        <Section title="Engineering" class="w-1/2">
+      <div class="grid grid-cols-2 gap-4">
+        <Section title="Engineering">
           <p>
             Having written code days and nights, I believe simplicity is the key
             to building complex yet maintainable software. However, achieving
@@ -84,19 +84,18 @@ export const prerender = true;
             language.
           </p>
         </Section>
-        <div class="w-1/2">
-          <Section title="Tools"> I use </Section>
-          <Section title="Life">
-            <p>
-              Despite spending days and nights programming, I do have a hobby
-              outside of coding. I'm also an occasional amateur photographer,
-              practicing street photography. Feel free to check out my shots on
-              the
-              <a href="/photography">photography</a> page.
-            </p>
-          </Section>
-        </div>
+        <Section title="Life">
+          <p>
+            Despite spending days and nights programming, I do have a hobby
+            outside of coding. I'm also an occasional amateur photographer,
+            practicing street photography. Feel free to check out my shots on
+            the
+            <a href="/photography">photography</a> page.
+          </p>
+        </Section>
+      </div>
 
+      <div class="col-span-2">
         <Section title="This website">
           <p>
             This website is the only one that finally made it out of many
@@ -135,7 +134,7 @@ export const prerender = true;
         </Section>
       </div>
     </Prose>
-
-    <Footer slot="footer" class="pt-12" />
   </main>
+
+  <Footer slot="footer" class="pt-12" />
 </Layout>
