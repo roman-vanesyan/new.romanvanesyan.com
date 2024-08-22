@@ -1,0 +1,33 @@
+---
+import ForefrontLayout from '@pages/_layouts/ForefrontLayout.astro';
+import Section from './_components/Section.astro';
+---
+
+<ForefrontLayout
+  title="Experiments, projects and stuff"
+  description=""
+  class="!bg-yellow-400"
+>
+  <div class="grid md:grid-cols-2 gap-10 lg:grid-cols-3">
+    <Section
+      title="jetlog.dart"
+      description="Strongly typed structural logger for Dart"
+      url="https://github.com/inoutgg/jetlog.dart"
+    />
+    <Section
+      title="foundations"
+      description="A modular library designed to build maintainable production-grade systems"
+      url="https://github.com/inoutgg/foundations"
+    />
+    <Section
+      title="config.nix"
+      description="Nix config for my macOS devices"
+      url="https://github.com/roman-vanesyan/config.nix"
+    />
+    <Section
+      title="romanvanesyan.com"
+      description="Source code of this website"
+      url="https://github.com/roman-vanesyan/romanvanesyan.com"
+    />
+  </div>
+</ForefrontLayout>

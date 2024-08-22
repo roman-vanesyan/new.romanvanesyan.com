@@ -1,0 +1,14 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+}
+---
+
+<a href={Astro.props.url} target="_blank" class="block">
+  <h2 class="border-b-2 border-gray-950 pb-2 font-sans text-xl font-bold">
+    {Astro.props.title}
+  </h2>
+  <p class="my-3 font-serif">{Astro.props.description}</p>
+</a>

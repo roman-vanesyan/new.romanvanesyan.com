@@ -2,8 +2,7 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro';
 import type { GetStaticPaths } from 'astro';
 import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
-import { all_bits, all_articles, all_seen_tags } from '@api/tags';
-import GlobalNavigation from '@components/GlobalNavigation/GlobalNavigation.astro';
+import { all_bits, all_articles, all_seen_tags } from '@api';
 import PostPreview from '@components/PostPreview.astro';
 
 export const prerender = true;

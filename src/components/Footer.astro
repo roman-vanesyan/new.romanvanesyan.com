@@ -15,17 +15,15 @@ const { class: class_names, ...rest } = Astro.props;
 <div slot="footer" class:list={['mx-auto mt-16', class_names]} {...rest}>
   <slot name="footer-top" />
   <div
-    class="mx-auto my-4 flex max-w-screen-xl flex-row flex-nowrap items-center justify-between"
+    class="mx-auto my-4 flex max-w-screen-lg flex-row flex-nowrap items-center justify-between"
   >
-    <div>
-      <span class="font-semibold">
-        © {format(new Date(), 'y')} Roman Vanesyan
-      </span>
-    </div>
+    <span class="inline-block text-sm font-semibold">
+      © {format(new Date(), 'y')} Roman Vanesyan
+    </span>
     <div class="flex flex-row gap-4">
       {
         links.map(({ href, id }) => (
-          <a href={href} class="inline-block h-8 w-8 fill-stone-600">
+          <a href={href} class="inline-block h-6 w-6 fill-stone-950">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
               <use href={`#${id}`} />
             </svg>

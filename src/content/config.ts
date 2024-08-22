@@ -3,7 +3,7 @@ import { defineCollection, reference, z } from 'astro:content';
 const bits = defineCollection({
   type: 'content',
   schema: z.object({
-    status: z.enum(['draft', 'published', 'hidden']),
+    draft: z.boolean().default(true),
     tags: z.array(reference('tags')),
     heading: z.string(),
     description: z.string(),
@@ -15,7 +15,7 @@ const bits = defineCollection({
 const articles = defineCollection({
   type: 'content',
   schema: z.object({
-    status: z.enum(['draft', 'published', 'hidden']),
+    draft: z.boolean().default(true),
     heading: z.string(),
     description: z.string(),
     tags: z.array(reference('tags')),

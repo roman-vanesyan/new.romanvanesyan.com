@@ -22,6 +22,10 @@ export default {
         ],
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono]
+      },
+
+      backgroundImage: {
+        noise: 'url("/public/noise.png")'
       }
     }
   },

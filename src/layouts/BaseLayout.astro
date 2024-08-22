@@ -18,13 +18,18 @@ interface Props {
     <slot slot="head" name="head" />
   </head>
   <body
-    class="bg-zinc-150 flex min-h-screen flex-col"
+    class="relative flex min-h-screen flex-col bg-neutral-50 text-stone-950"
     class:list={Astro.props.class}
   >
     <slot />
-
     <script>
       import * as htmx from 'htmx.org';
+
+      declare global {
+        interface Window {
+          htmx: typeof htmx;
+        }
+      }
 
       document.addEventListener('astro:after-swap', function () {
         htmx.process(document.body);

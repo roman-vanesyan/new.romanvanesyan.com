@@ -1,16 +1,17 @@
 ---
 interface Props {
   href: string;
-  color: 'stone' | 'slate';
+  color: 'stone' | 'slate' | 'yellow';
 }
 
-const { content, href, color } = Astro.props;
+const { href, color } = Astro.props;
 ---
 
 <a
   href={href}
   class:list={{
     'text-stone-400 hover:text-stone-800': color === 'stone',
+    'text-stone-800 hover:text-stone-960': color === 'yellow',
     'text-slate-700 hover:text-slate-950': color === 'slate'
   }}
 >

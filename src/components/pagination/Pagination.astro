@@ -17,7 +17,7 @@ const pages = generate_pagination(Astro.props.totalPagesCount);
 ---
 
 <div
-  class="my-10 flex select-none flex-row justify-between text-xl font-semibold text-stone-400"
+  class="mt-10 flex select-none flex-row justify-between text-xl font-semibold text-stone-400"
 >
   <PaginationLink href={Astro.props.prev} active={false}>{'<-'}</PaginationLink>
   <ul class="flex flex-row">

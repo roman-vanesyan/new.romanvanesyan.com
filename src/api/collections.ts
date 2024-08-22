@@ -1,10 +1,18 @@
 import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
 import { differenceInMilliseconds } from 'date-fns';
 
-export const all_articles = (await getCollection('articles')).sort((a, b) =>
+export const all_articles = (
+  await getCollection(
+    'articles',
+    ({ data }) => import.meta.env.DEV || !data.draft
+  )
+).sort((a, b) =>
   differenceInMilliseconds(b.data.published_at, a.data.published_at)
 );
-export const all_bits = (await getCollection('bits')).sort((a, b) =>
+
+export const all_bits = (
+  await getCollection('bits', ({ data }) => import.meta.env.DEV || !data.draft)
+).sort((a, b) =>
   differenceInMilliseconds(b.data.published_at, a.data.published_at)
 );
 

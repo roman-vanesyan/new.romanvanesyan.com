@@ -15,8 +15,8 @@ const { count, tag, size = 'sm', fill = false } = Astro.props;
 <a
   href={`/tags/${tag.id}`}
   class:list={[
-    'inline-block font-sans leading-4 text-stone-500 underline hover:no-underline',
-    fill ? ['px-1', 'py-1', 'bg-stone-100'] : [],
+    'inline-block font-sans leading-4 text-stone-600 underline hover:no-underline',
+    fill ? ['px-1', 'py-1', 'bg-stone-200'] : [],
     {
       'text-sm': size === 'sm',
       'text-base': size === 'md',
