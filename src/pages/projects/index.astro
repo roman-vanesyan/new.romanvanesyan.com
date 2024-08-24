@@ -8,11 +8,13 @@ export const prerender = true;
 <ForefrontLayout title="Experiments, projects and stuff" description="">
   <style>
     :root {
-      --bg-color: theme('colors.indigo.200');
-      --text-color: theme('colors.indigo.950');
+      --bg-color: theme('colors.indigo.200') !important;
+      --text-color: theme('colors.indigo.950') !important;
 
-      --GlobalNavigation-text-color: theme('colors.indigo.900');
-      --GlobalNavigation-text-color--hover: theme('colors.indigo.950');
+      --GlobalNavigation-text-color: theme('colors.indigo.900') !important;
+      --GlobalNavigation-text-color--hover: theme(
+        'colors.indigo.950'
+      ) !important;
     }
   </style>
 

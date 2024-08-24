@@ -8,13 +8,15 @@ import Section from './_components/Section.astro';
 export const prerender = true;
 ---
 
-<Layout title="Roman Vanesyan" description="">
+<Layout title="Roman Vanesyan" description="About me">
   <style>
     :root {
-      --bg-color: theme('colors.blue.300');
-      --text-color: theme('colors.slate.950');
-      --GlobalNavigation-text-color: theme('colors.slate.700');
-      --GlobalNavigation-text-color--hover: theme('colors.slate.950');
+      --bg-color: theme('colors.blue.300') !important;
+      --text-color: theme('colors.slate.950') !important;
+      --GlobalNavigation-text-color: theme('colors.slate.700') !important;
+      --GlobalNavigation-text-color--hover: theme(
+        'colors.slate.950'
+      ) !important;
     }
   </style>
 
