@@ -3,28 +3,30 @@ import { top_10_freq_tags } from '@api';
 import Tag from '@components/Tag.astro';
 ---
 
-<div class="flex flex-col gap-4">
-  <h2 class="text-xl text-stone-600">Frequent Topics</h2>
-  <div class="flex flex-col flex-nowrap gap-2">
-    <div class="flex flex-row flex-wrap gap-2">
-      {
-        top_10_freq_tags.map((t) => (
-          <Tag
-            tag={{ id: t.id, name: t.data.name }}
-            count={t.count}
-            fill={true}
-          />
-        ))
-      }
-    </div>
+{
+  top_10_freq_tags.length > 0 ? (
+    <div class="flex flex-col gap-4">
+      <h2 class="text-xl text-stone-600">Frequent Topics</h2>
+      <div class="flex flex-col flex-nowrap gap-2">
+        <div class="flex flex-row flex-wrap gap-2">
+          {top_10_freq_tags.map((t) => (
+            <Tag
+              tag={{ id: t.id, name: t.data.name }}
+              count={t.count}
+              fill={true}
+            />
+          ))}
+        </div>
 
-    <div>
-      <a
-        href="/tags"
-        class="text-sm text-stone-500 underline hover:no-underline"
-      >
-        See all topics {'->'}
-      </a>
+        <div>
+          <a
+            href="/tags"
+            class="text-sm text-stone-500 underline hover:no-underline"
+          >
+            See all topics {'->'}
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  ) : null
+}
