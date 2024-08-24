@@ -6,10 +6,16 @@ import { all_bits } from '@api';
 const bits = all_bits.slice(0, 5);
 ---
 
-<ContentBlock
-  heading="Latest Bits"
-  all={{ content: 'See all bits ->', href: '/bits' }}
-  orientation="horizontal"
->
-  {bits.map((bit) => <BitPreview bit={bit} />)}
-</ContentBlock>
+{
+  bits.length > 0 ? (
+    <ContentBlock
+      heading="Latest Bits"
+      all={{ content: 'See all bits ->', href: '/bits' }}
+      orientation="horizontal"
+    >
+      {bits.map((bit) => (
+        <BitPreview bit={bit} />
+      ))}
+    </ContentBlock>
+  ) : null
+}

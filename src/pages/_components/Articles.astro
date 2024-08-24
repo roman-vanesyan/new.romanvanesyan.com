@@ -6,9 +6,16 @@ import ArticlePreview from '@pages/_components/ArticlePreview.astro';
 const articles = await getCollection('articles');
 ---
 
-<ContentBlock
-  heading="Latest Articles"
-  all={{ content: 'Sell all articles ->', href: '/articles' }}
->
-  {articles.map((article) => <ArticlePreview article={article} />)}
-</ContentBlock>
+{
+  articles.length > 0 ? (
+    <ContentBlock
+      heading="Latest Articles"
+      all={{ content: 'Sell all articles ->', href: '/articles' }}
+      orientation="horizontal"
+    >
+      {articles.map((article) => (
+        <ArticlePreview article={article} />
+      ))}
+    </ContentBlock>
+  ) : null
+}

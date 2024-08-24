@@ -11,8 +11,12 @@ interface Props {
   <CommonHeader>
     <div class="flex-1" slot="left-side">
       <div class="w-2/3">
-        <h1 class="mb-4 text-4xl font-bold">{Astro.props.heading}</h1>
-        <slot slot="subheading" name="subheading" />
+        <Prose size="lg">
+          <h1 class="mb-4 text-4xl !font-bold">{Astro.props.heading}</h1>
+        </Prose>
+        <Prose size="lg" slot="subheading">
+          <slot name="subheading" />
+        </Prose>
       </div>
     </div>
   </CommonHeader>
