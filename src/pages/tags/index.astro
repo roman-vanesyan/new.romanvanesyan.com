@@ -2,7 +2,6 @@
 import { all_seen_tags } from '@api';
 import Tag from '@components/Tag.astro';
 import DefaultLayout from '@layouts/DefaultLayout.astro';
-import GlobalNavigation from '@components/global_navigation/GlobalNavigation.astro';
 import Footer from '@components/Footer.astro';
 
 export const prerender = true;
@@ -18,6 +17,7 @@ export const prerender = true;
             tag={{ id: t.id, name: t.data.name }}
             count={t.count}
             fill={true}
+            size="lg"
           />
         ))
       }

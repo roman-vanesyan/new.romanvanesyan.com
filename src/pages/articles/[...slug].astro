@@ -1,10 +1,8 @@
 ---
 import { format, formatISO } from 'date-fns';
 import DefaultLayout from '@layouts/DefaultLayout.astro';
-import Tag from '@components/Tag.astro';
 import type { GetStaticPaths } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import GlobalNavigation from '@components/global_navigation/GlobalNavigation.astro';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 import Prose from '@components/Prose.astro';
@@ -33,7 +31,6 @@ if (!article) {
 }
 
 const { Content, headings } = await article.render();
-const tags = await getEntries(article.data.tags);
 const toc = create_toc(headings);
 ---
 

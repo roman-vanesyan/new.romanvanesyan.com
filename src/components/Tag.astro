@@ -6,7 +6,7 @@ interface Props {
   };
   count?: number;
   fill?: boolean;
-  size: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
 }
 
 const { count, tag, size = 'sm', fill = false } = Astro.props;

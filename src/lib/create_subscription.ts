@@ -18,7 +18,7 @@ export default async function create_subscription(
   db: PrismaClient,
   data: {
     email: string;
-    name: Nullable<string>;
+    name?: Nullable<string>;
   }
 ): Promise<CreateSubscriptionOutput> {
   try {
