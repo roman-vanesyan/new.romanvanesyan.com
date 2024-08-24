@@ -86,14 +86,20 @@ const toc = create_toc(headings);
         </footer>
       </div>
 
-      <aside class="flex-1">
-        <div class="sticky top-0">
-          <h2 class="mb-2 text-lg font-semibold">On this page</h2>
-          <div class="text-stone-500">
-            <Toc nodes={toc} depth={3} />
-          </div>
-        </div>
-      </aside>
+      {
+        toc.length === 0 ? (
+          <div class="flex-1" />
+        ) : (
+          <aside class="flex-1">
+            <div class="sticky top-0">
+              <h2 class="mb-2 text-lg font-semibold">On this page</h2>
+              <div class="text-stone-500">
+                <Toc nodes={toc} depth={3} />
+              </div>
+            </div>
+          </aside>
+        )
+      }
     </div>
   </article>
 

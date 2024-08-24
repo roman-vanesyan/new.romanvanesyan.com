@@ -12,17 +12,15 @@ export const getStaticPaths = (({ paginate }) => {
 
 const { page } = Astro.props;
 const posts = await Promise.all(
-  page.data.map(async (bit) => {
-    return {
-      author: await getEntry(bit.data.authored_by),
-      tags: await getEntries(bit.data.tags),
-      publishedAt: bit.data.published_at,
-      description: bit.data.description,
-      heading: bit.data.heading,
-      slug: bit.slug,
-      collection: bit.collection
-    };
-  })
+  page.data.map(async (bit) => ({
+    author: await getEntry(bit.data.authored_by),
+    tags: await getEntries(bit.data.tags),
+    publishedAt: bit.data.published_at,
+    description: bit.data.description,
+    heading: bit.data.heading,
+    slug: bit.slug,
+    collection: bit.collection
+  }))
 );
 ---
 
