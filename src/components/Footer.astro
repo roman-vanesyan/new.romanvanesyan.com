@@ -23,7 +23,7 @@ const { class: class_names, ...rest } = Astro.props;
     <div class="flex flex-row gap-4">
       {
         links.map(({ href, id }) => (
-          <a href={href} class="inline-block h-6 w-6 fill-stone-950">
+          <a href={href} class="inline-block h-6 w-6 fill-[var(--text-color)]">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
               <use href={`#${id}`} />
             </svg>

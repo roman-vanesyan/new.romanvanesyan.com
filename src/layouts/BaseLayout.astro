@@ -1,12 +1,11 @@
 ---
 import Head from '@components/Head.astro';
-import '@root/main.css';
 import { ViewTransitions } from 'astro:transitions';
+import '@root/main.css';
 
 interface Props {
   title: string;
   description: string;
-  class?: string;
 }
 ---
 
@@ -16,10 +15,16 @@ interface Props {
     <Head title={Astro.props.title} description={Astro.props.description} />
     <ViewTransitions />
     <slot slot="head" name="head" />
+
+    <style>
+      :root {
+        --bg-color: theme('colors.neutral.50');
+        --text-color: theme('colors.stone.950');
+      }
+    </style>
   </head>
   <body
-    class="relative flex min-h-screen flex-col bg-neutral-50 text-stone-950"
-    class:list={Astro.props.class}
+    class="relative flex min-h-screen flex-col bg-[var(--bg-color)] text-[var(--text-color)]"
   >
     <slot />
     <script>

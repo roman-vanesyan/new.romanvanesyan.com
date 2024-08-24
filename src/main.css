@@ -4,13 +4,13 @@
 
 @layer base {
   :root {
-    --bg-color: theme('colors.stone.100');
-    --hl-comment-color: theme('colors.stone.500');
-    --hl-punctuation-color: theme('colors.stone.400');
-    --hl-operator-color: theme('colors.stone.400');
-    --hl-ident-color: theme('colors.stone.900');
-    --hl-keyword-color: theme('colors.stone.900');
-    --hl-constant-color: theme('colors.stone.900');
+    --code-bg-color: theme('colors.stone.100');
+    --code-hl-comment-color: theme('colors.stone.500');
+    --code-hl-punctuation-color: theme('colors.stone.400');
+    --code-hl-operator-color: theme('colors.stone.400');
+    --code-hl-ident-color: theme('colors.stone.900');
+    --code-hl-keyword-color: theme('colors.stone.900');
+    --code-hl-constant-color: theme('colors.stone.900');
   }
 }
 
@@ -18,12 +18,12 @@
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: var(--hl-comment-color);
+  color: var(--code-hl-comment-color);
   @apply italic;
 }
 
 .token.punctuation {
-  color: var(--hl-punctuation-color);
+  color: var(--code-hl-punctuation-color);
 }
 
 .token.tag,
@@ -31,7 +31,7 @@
 .token.number,
 .token.selector,
 .token.deleted {
-  color: var(--hl-constant-color);
+  color: var(--code-hl-constant-color);
 }
 
 .token.keyword,
@@ -39,7 +39,7 @@
 .token.constant,
 .token.symbol,
 .token.builtin {
-  color: var(--hl-keyword-color);
+  color: var(--code-hl-keyword-color);
   @apply font-bold;
 }
 
@@ -54,12 +54,12 @@
 .style .token.string,
 .token.variable,
 .token.inserted {
-  color: var(--hl-constant-color);
+  color: var(--code-hl-constant-color);
 }
 
 .token.function,
 .token.attr-value {
-  color: var(--hl-constant-color);
+  color: var(--code-hl-constant-color);
 }
 
 .token.important {

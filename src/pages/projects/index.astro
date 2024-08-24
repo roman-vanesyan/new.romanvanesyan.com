@@ -3,31 +3,66 @@ import ForefrontLayout from '@pages/_layouts/ForefrontLayout.astro';
 import Section from './_components/Section.astro';
 ---
 
-<ForefrontLayout
-  title="Experiments, projects and stuff"
-  description=""
-  class="!bg-yellow-400"
->
-  <div class="grid md:grid-cols-2 gap-10 lg:grid-cols-3">
-    <Section
-      title="jetlog.dart"
-      description="Strongly typed structural logger for Dart"
-      url="https://github.com/inoutgg/jetlog.dart"
-    />
-    <Section
-      title="foundations"
-      description="A modular library designed to build maintainable production-grade systems"
-      url="https://github.com/inoutgg/foundations"
-    />
-    <Section
-      title="config.nix"
-      description="Nix config for my macOS devices"
-      url="https://github.com/roman-vanesyan/config.nix"
-    />
-    <Section
-      title="romanvanesyan.com"
-      description="Source code of this website"
-      url="https://github.com/roman-vanesyan/romanvanesyan.com"
-    />
+<ForefrontLayout title="Experiments, projects and stuff" description="">
+  <style>
+    :root {
+      --bg-color: theme('colors.indigo.200');
+      --text-color: theme('colors.indigo.950');
+
+      --GlobalNavigation-text-color: theme('colors.indigo.900');
+      --GlobalNavigation-text-color--hover: theme('colors.indigo.950');
+    }
+  </style>
+
+  <div class="flex flex-col gap-10">
+    <section class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <Section
+        title="jetlog.dart"
+        description="Strongly typed structural logger for Dart"
+        url="https://github.com/inoutgg/jetlog.dart"
+      />
+      <Section
+        title="foundations"
+        description="A modular library designed to build maintainable production-grade systems"
+        url="https://github.com/inoutgg/foundations"
+      />
+      <Section
+        title="shield"
+        description="A modular library designed to build maintainable production-grade systems"
+        url="https://github.com/inoutgg/foundations"
+      />
+      <Section
+        title="config.nix"
+        description="Nix config for my macOS devices"
+        url="https://github.com/roman-vanesyan/config.nix"
+      />
+      <Section
+        title="romanvanesyan.com"
+        description="Source code of this website"
+        url="https://github.com/roman-vanesyan/romanvanesyan.com"
+      />
+    </section>
+    <section>
+      <h2 class="mb-10 font-sans text-2xl font-bold">Autodated</h2>
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        <Section
+          title="graphite"
+          description="A GraphQL parser implementation in Dart"
+          url="https://github.com/roman-vanesyan/graphite"
+        />
+
+        <Section
+          title="redis.dart"
+          description="A high performance Redis/RESP client for Dart"
+          url="https://github.com/roman-vanesyan/graphite"
+        />
+
+        <Section
+          title="Refactr CLI"
+          description="I created the initial version of the CLI for Sophos Factory CI/CD"
+          url="https://github.com/sophos/factory-cli/commits?author=romanrefactr"
+        />
+      </div>
+    </section>
   </div>
 </ForefrontLayout>
