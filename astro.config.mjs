@@ -9,7 +9,7 @@ import rehypeSlug from 'rehype-slug';
 export default defineConfig({
   prefetch: true,
   site: 'https://romanvanesyan.com',
-  output: 'server',
+  output: 'hybrid',
   integrations: [
     tailwind({
       applyBaseStyles: false

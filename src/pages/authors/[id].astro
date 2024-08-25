@@ -1,6 +1,8 @@
 ---
 import { getEntry } from 'astro:content';
 
+export const prerender = false;
+
 const { id } = Astro.params;
 const author = await getEntry('authors', id!);
 if (author) {
