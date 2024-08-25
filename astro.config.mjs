@@ -9,7 +9,7 @@ import rehypeSlug from 'rehype-slug';
 export default defineConfig({
   prefetch: true,
   site: 'https://romanvanesyan.com',
-  output: 'hybrid',
+  output: 'server',
   integrations: [
     tailwind({
       applyBaseStyles: false
@@ -37,8 +37,7 @@ export default defineConfig({
   },
   adapter: cloudflare({
     platformProxy: {
-      enabled: true,
-      configPath: './wrangler.toml'
+      enabled: true
     }
   }),
 
