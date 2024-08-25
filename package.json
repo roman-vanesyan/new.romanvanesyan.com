@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "romanvanesyan.com",
-  "type": "module",
   "version": "0.0.1",
   "scripts": {
     "start": "wrangler types && prisma generate && astro dev",
