@@ -1,21 +1,21 @@
 generator client {
-    provider = "prisma-client-js"
-    previewFeatures = ["driverAdapters"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-    provider = "sqlite"
-    // the field is required by prisma generator, however it won't be used
-    // as the d1 adapter comes with its own connection mechanism.
-    url = env("DATABASE_URL")
+  provider = "sqlite"
+  // the field is required by prisma generator, however it won't be used
+  // as the d1 adapter comes with its own connection mechanism.
+  url      = "file:./dev.db"
 }
 
 model SubscribedUser {
-    @@map("subscribed_users")
+  id                String   @id @default(cuid())
+  created_at        DateTime @default(now())
+  email             String   @unique
+  name              String?
+  is_email_verified Boolean  @default(false)
 
-    id String @id @default(cuid())
-    created_at DateTime @default(now())
-    email String @unique
-    name String?
-    is_email_verified Boolean @default(false)
+  @@map("subscribed_users")
 }
