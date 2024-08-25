@@ -11,8 +11,10 @@ interface Props {
 const { all } = Astro.props;
 ---
 
-<div class="flex flex-row flex-nowrap">
-  <h2 class="w-1/6 pr-8 text-right text-4xl text-stone-600">
+<div class="flex flex-col flex-nowrap md:flex-row">
+  <h2
+    class="mb-4 w-full text-left text-3xl text-stone-600 md:mb-0 md:w-1/6 md:pr-8 md:text-right md:text-4xl"
+  >
     {Astro.props.heading}
   </h2>
   <div class="flex flex-grow flex-col gap-4">
@@ -30,5 +32,5 @@ const { all } = Astro.props;
       ) : null
     }
   </div>
-  <div class="w-1/6"></div>
+  <div class="hidden md:block md:w-1/6"></div>
 </div>

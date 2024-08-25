@@ -12,7 +12,7 @@ export const prerender = true;
 ---
 
 <Layout title="Roman Vanesyan" description="">
-  <div slot="header" class="mx-auto w-full max-w-screen-lg">
+  <div slot="header" class="mx-auto w-full max-w-screen-lg px-4 md:px-0">
     <Header heading="Hey, I am Roman">
       <div slot="subheading">
         <p class="font-sans font-semibold">
@@ -22,24 +22,24 @@ export const prerender = true;
       </div>
     </Header>
   </div>
-  <main class="mx-auto w-full max-w-screen-2xl">
-    <div class="flex flex-row pb-12 pt-4">
-      <div class="w-1/6"></div>
+  <main class="mx-auto w-full max-w-screen-2xl px-4 md:px-0">
+    <div class="flex flex-col md:flex-row pb-12 pt-4">
+      <div class="hidden md:block md:w-1/6"></div>
       <div class="flex flex-grow flex-col">
         <FrequentTags />
       </div>
-      <div class="w-1/6"></div>
+      <div class="hidden md:block md:w-1/6"></div>
     </div>
 
     <div class="flex flex-col">
       <Bits />
-      <Divider class="mx-auto w-2/3" />
+      <Divider class="mx-auto w-full md:w-2/3" />
       <Articles />
     </div>
   </main>
   <Footer slot="footer">
     <div class="bg-stone-100" slot="footer-top">
-      <div class="mx-auto max-w-screen-lg px-2 py-4">
+      <div class="mx-auto max-w-screen-lg px-4 md:px-2 py-4">
         <SubscriptionForm />
       </div>
     </div>

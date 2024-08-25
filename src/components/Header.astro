@@ -3,9 +3,11 @@ import GlobalNavigation from '@components/global_navigation/GlobalNavigation.ast
 ---
 
 <div class="w-full">
-  <div class="mb-12 mt-6 flex flex-row gap-16">
-    <slot name="left-side" />
-    <div>
+  <div class="flex flex-col gap-8 md:flex-row md:gap-16">
+    <div class="order-2 md:order-1 md:flex-grow">
+      <slot name="left-side" />
+    </div>
+    <div class="order-1 md:order-2">
       <GlobalNavigation orientation="vertical" />
     </div>
   </div>

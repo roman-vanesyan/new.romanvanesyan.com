@@ -14,7 +14,9 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false
     }),
-    sitemap(),
+    sitemap({
+      filter: (p) => !p.includes('/api/')
+    }),
     mdx()
   ],
   markdown: {

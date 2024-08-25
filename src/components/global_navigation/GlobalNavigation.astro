@@ -22,14 +22,16 @@ const { orientation = 'vertical' } = Astro.props;
   }
 </style>
 
-<nav class="w-full text-2xl font-semibold">
+<nav class="w-full text-xl font-semibold md:text-2xl">
   <ul
-    class="flex gap-1"
-    class:list={orientation === 'vertical'
-      ? 'flex-col gap-1'
-      : 'flex-row gap-4'}
+    class:list={[
+      'flex gap-2',
+      orientation === 'vertical'
+        ? 'flex-row md:flex-col md:gap-1'
+        : 'flex-row items-center'
+    ]}
   >
-    <li class="mr-auto">
+    <li class={orientation === 'vertical' ? 'mr-auto md:mr-0' : 'mr-auto'}>
       <GlobalNavigationLink href="/">Home</GlobalNavigationLink>
     </li>
 
