@@ -22,10 +22,17 @@ const validation_result = subscription_form_schema.safeParse({
 });
 
 let result: CreateSubscriptionOutput | null = null;
+let error: unknown;
 if (validation_result.success) {
+  try {
   result = await create_subscription(db, validation_result.data);
+  } catch (e) {
+    error =e 
+  }
 }
 ---
+
+{error?.toString()}
 
 {
   !result ? (
