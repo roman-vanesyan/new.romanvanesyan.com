@@ -4,9 +4,8 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "start": "astro dev",
-    "build": "prisma generate && astro check && astro build",
-    "astro": "astro"
+    "start": "wrangler types && prisma generate && astro dev",
+    "build": "wrangler types && prisma generate && astro check && astro build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.2",
