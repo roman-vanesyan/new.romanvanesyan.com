@@ -31,12 +31,12 @@ if (validation_result.success) {
   !result ? (
     <SubscriptionForm validationError={validation_result.error!} />
   ) : result.status === CreateSubscriptionStatus.ok ? (
-    'Subscription is created'
+    'You’re now subscribed. Hang tight, and you’ll definitely receive a message from me.'
   ) : result.status === CreateSubscriptionStatus.already_exists ? (
     result.is_email_verified ? (
-      'You have already subscribed, one day you will receive an email from me!'
+      'You’ve already subscribed — one day, you’ll receive an email from me!'
     ) : (
-      'You are just one click apart, checkout your email!'
+      'You’re just one click away — check your email!'
     )
   ) : null
 }
