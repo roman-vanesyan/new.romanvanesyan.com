@@ -1,0 +1,9 @@
+name = "romanvanesyan-com"
+pages_build_output_dir = "./dist"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "romanvanesyan-com-prod-db"
+database_id = "fd1c6056-0673-4fed-b303-b1316d2c9ca5"
+migrations_dir = "./migrations"
