@@ -11,6 +11,7 @@
       "@api/*": ["./src/api/*"],
       "@api": ["./src/api/index.ts"]
     },
-    "types": ["@cloudflare/workers-types"]
+    "types": ["@cloudflare/workers-types"],
+    "skipLibCheck": true
   }
 }

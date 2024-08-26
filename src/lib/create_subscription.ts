@@ -1,6 +1,8 @@
-import { type PrismaClient } from '@prisma/client';
-import { is_unique_constraint } from './prisma_errors';
+import { users } from '@root/db/schema';
+import { is_unique_constraint } from '@root/db/errors';
 import { type Nullable } from '@lib/util';
+import type { DrizzleD1Database } from 'drizzle-orm/d1';
+import { eq } from 'drizzle-orm';
 
 export enum CreateSubscriptionStatus {
   ok = 'ok',
@@ -8,43 +10,43 @@ export enum CreateSubscriptionStatus {
 }
 
 export type CreateSubscriptionOutput =
-  | { status: CreateSubscriptionStatus.ok; user_id: string }
+  | { status: CreateSubscriptionStatus.ok; user_id: number }
   | {
       status: CreateSubscriptionStatus.already_exists;
       is_email_verified: boolean;
     };
 
 export default async function create_subscription(
-  db: PrismaClient,
+  db: DrizzleD1Database,
   data: {
     email: string;
     name?: Nullable<string>;
   }
 ): Promise<CreateSubscriptionOutput> {
   try {
-    const user = await db.subscribedUser.create({
-      data,
-      select: { id: true }
-    });
+    const [user] = await db
+      .insert(users)
+      .values({
+        email: data.email,
+        name: data.name
+      })
+      .returning({ inserted_id: users.id });
 
     return {
       status: CreateSubscriptionStatus.ok,
-      user_id: user.id
+      user_id: user.inserted_id
     };
   } catch (e) {
     if (is_unique_constraint(e)) {
-      const user = await db.subscribedUser.findUnique({
-        where: {
-          email: data.email
-        },
-        select: {
-          is_email_verified: true
-        }
-      });
+      const [user] = await db
+        .select({ email: users.email, is_verified: users.is_email_verified })
+        .from(users)
+        .where(eq(users.email, data.email))
+        .limit(1);
 
       return {
         status: CreateSubscriptionStatus.already_exists,
-        is_email_verified: user?.is_email_verified ?? false
+        is_email_verified: user?.is_verified ?? false
       };
     }
 

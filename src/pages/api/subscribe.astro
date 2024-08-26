@@ -1,5 +1,5 @@
 ---
-import create_db from '@root/db';
+import { drizzle } from 'drizzle-orm/d1';
 import create_subscription, {
   CreateSubscriptionStatus,
   type CreateSubscriptionOutput
@@ -14,7 +14,7 @@ if (Astro.request.method !== 'POST') {
   return Astro.redirect('/404');
 }
 
-const db = create_db(Astro.locals.runtime.env.DB);
+const db = drizzle(Astro.locals.runtime.env.DB);
 const form_data = await Astro.request.formData();
 
 const validation_result = subscription_form_schema.safeParse({

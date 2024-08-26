@@ -22,12 +22,14 @@ export const prerender = true;
 
   <main class="mx-auto w-full max-w-screen-lg">
     <div class="w-full">
-      <div class="mb-12 flex flex-row gap-16">
-        <div class="flex-1">
-          <div class="w-2/3">
+      <div class="mb-12 flex flex-col md:flex-row md:gap-16">
+        <div class="order-2 flex-1 md:order-1">
+          <div class="w-full md:w-2/3">
             <Prose size="lg" color="slate">
               <section>
-                <h1 class="mb-4 text-4xl !font-bold">Hey, I am Roman</h1>
+                <h1 class="mb-4 text-3xl !font-bold sm:text-4xl">
+                  Hey, I am Roman
+                </h1>
                 <div class="font-sans font-semibold">
                   <p>
                     I'm a software engineer, and programming has turned out to
@@ -59,14 +61,14 @@ export const prerender = true;
             </Prose>
           </div>
         </div>
-        <div>
+        <div class="order-1 mb-8 md:order-2 md:mb-0">
           <GlobalNavigation orientation="vertical" />
         </div>
       </div>
     </div>
 
     <Prose size="md" color="slate">
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Section title="Engineering">
           <p>
             Having written code days and nights, I believe simplicity is the key
@@ -106,7 +108,7 @@ export const prerender = true;
         </Section>
       </div>
 
-      <div class="col-span-2">
+      <div class="col-span-1 sm:col-span-2">
         <Section title="This website">
           <p>
             This website is the only one that finally made it out of many
