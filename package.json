@@ -3,8 +3,8 @@
   "name": "romanvanesyan.com",
   "version": "0.0.1",
   "scripts": {
-    "start": "wrangler types && prisma generate && astro dev",
-    "build": "wrangler types && prisma generate && astro check && astro build"
+    "start": "wrangler types && astro dev",
+    "build": "wrangler types && astro check && astro build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
