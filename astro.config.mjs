@@ -15,7 +15,7 @@ export default defineConfig({
       applyBaseStyles: false
     }),
     sitemap({
-      filter: (p) => !p.includes('/api/') && !p.endsWith('/draft')
+      filter: (p) => !p.includes('/api/') && !p.includes('/draft/')
     }),
     mdx()
   ],
