@@ -6,9 +6,9 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import Footer from '@components/Footer.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 import Prose from '@components/Prose.astro';
-import { getEntries } from 'astro:content';
 import { create_toc } from '@lib/create_toc';
 import Toc from '@components/toc/Toc.astro';
+import { post_slug } from '@lib/post_slug';
 
 export const prerender = true;
 
@@ -21,7 +21,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return articles.map((article) => ({
     props: { article },
-    params: { slug: article.slug }
+    params: {
+      slug: post_slug(article)
+    }
   }));
 };
 

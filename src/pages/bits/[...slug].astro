@@ -14,6 +14,7 @@ import Tag from '@components/Tag.astro';
 import Toc from '@components/toc/Toc.astro';
 import SubscriptionForm from '@components/SubscriptionForm.astro';
 import { create_toc } from '@lib/create_toc';
+import { post_slug } from '@lib/post_slug';
 
 export const prerender = true;
 
@@ -26,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return bits.map((bit) => ({
     props: { bit: bit },
-    params: { slug: bit.slug }
+    params: { slug: post_slug(bit) }
   }));
 };
 
@@ -104,7 +105,7 @@ const toc = create_toc(headings);
   </article>
 
   <BlogPostingSchema
-    id={bit.slug}
+    id={post_slug(bit)}
     heading={bit.data.heading}
     description={bit.data.description}
     publishedAt={bit.data.published_at}

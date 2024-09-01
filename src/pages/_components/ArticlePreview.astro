@@ -1,6 +1,7 @@
 ---
 import { getEntry, getEntries, type CollectionEntry } from 'astro:content';
 import PostPreview from '@components/PostPreview.astro';
+import { post_slug } from '@lib/post_slug';
 
 interface Props {
   article: CollectionEntry<'articles'>;
@@ -16,7 +17,7 @@ const tags = await getEntries(article.data.tags);
 
 <article class="bg-stone-100 p-4">
   <PostPreview
-    url={`/articles/${article.slug}`}
+    url={`/articles/${post_slug(article)}`}
     title={article.data.heading}
     description={article.data.description}
     tags={tags.map((t) => ({ id: t.id, name: t.data.name }))}

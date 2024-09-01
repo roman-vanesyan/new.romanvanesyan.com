@@ -3,6 +3,7 @@ import { all_articles } from '@api';
 import { getEntry, getEntries } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import PostListLayout from '@pages/_layouts/PostListLayout.astro';
+import { post_slug } from '@lib/post_slug';
 
 export const prerender = true;
 
@@ -12,17 +13,13 @@ export const getStaticPaths = (({ paginate }) => {
 
 const { page } = Astro.props;
 const posts = await Promise.all(
-  page.data.map(async (article) => {
-    return {
-      author: await getEntry(article.data.authored_by),
-      tags: await getEntries(article.data.tags),
-      publishedAt: article.data.published_at,
-      description: article.data.description,
-      heading: article.data.heading,
-      slug: article.slug,
-      collection: article.collection
-    };
-  })
+  page.data.map(async (article) => ({
+    collection: article.collection,
+    slug: post_slug(article),
+    author: await getEntry(article.data.authored_by),
+    tags: await getEntries(article.data.tags),
+    data: article.data
+  }))
 );
 ---
 

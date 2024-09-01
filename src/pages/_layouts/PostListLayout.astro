@@ -5,15 +5,19 @@ import Header from '@pages/_components/forefront/Header.astro';
 import Layout, { type Props as LayoutProps } from '@layouts/Layout.astro';
 import PostPreview from '@components/PostPreview.astro';
 import Pagination from '@components/pagination/Pagination.astro';
+import { post_slug } from '@lib/post_slug';
 
 interface Post {
   collection: string;
   slug: string;
   author: CollectionEntry<'authors'>;
   tags: CollectionEntry<'tags'>[];
-  publishedAt: Date;
-  heading: string;
-  description: string;
+  data: {
+    draft: boolean;
+    published_at: Date;
+    heading: string;
+    description: string;
+  };
 }
 
 interface Props extends LayoutProps {
@@ -45,9 +49,9 @@ const { posts, page, baseUrl, ...rest } = Astro.props;
           posts.map((post) => (
             <PostPreview
               url={`${Astro.props.baseUrl}/${post.slug}`}
-              title={post.heading}
+              title={post.data.heading}
               tags={post.tags.map((t) => ({ id: t.id, name: t.data.name }))}
-              publishedAt={post.publishedAt}
+              publishedAt={post.data.published_at}
               author={{ id: post.author.id, name: post.author.data.name }}
             />
           ))
