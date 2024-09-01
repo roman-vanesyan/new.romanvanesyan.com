@@ -39,9 +39,20 @@ const tags = defineCollection({
   })
 });
 
+const projects = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    external_url: z.string().url(),
+    description: z.string(),
+    outdated: z.boolean()
+  })
+});
+
 export const collections = {
   articles,
   bits,
   authors,
-  tags
+  tags,
+  projects
 };

@@ -1,0 +1,6 @@
+{
+  "name": "shield",
+  "external_url": "https://github.com/inoutgg/shield",
+  "description": "Shield is a comprehensive, opinionated authentication framework for Go built on PostgreSQL",
+  "outdated": false
+}

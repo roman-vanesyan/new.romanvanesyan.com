@@ -1,16 +1,16 @@
 ---
 interface Props {
-  title: string;
+  name: string;
   description: string;
   url: string;
 }
 ---
 
-<a href={Astro.props.url} target="_blank" class="block">
+<a href={Astro.props.url} target="_blank" class="group block">
   <h2
-    class="border-b-2 border-[var(--text-color)] pb-2 font-sans text-xl font-bold"
+    class="inline-block rounded px-2 py-1 font-sans text-xl font-bold leading-none group-hover:bg-indigo-50"
   >
-    {Astro.props.title}
+    {Astro.props.name}
   </h2>
-  <p class="my-3 font-serif">{Astro.props.description}</p>
+  <p class="my-3 ml-2 font-serif">{Astro.props.description}</p>
 </a>

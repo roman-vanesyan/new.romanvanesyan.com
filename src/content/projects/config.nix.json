@@ -1,0 +1,6 @@
+{
+  "name": "config.nix",
+  "external_url": "https://github.com/roman-vanesyan/config.nix",
+  "description": "Nix config for my macOS devices",
+  "outdated": false
+}

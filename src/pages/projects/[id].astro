@@ -1,0 +1,14 @@
+---
+import { getEntry } from 'astro:content';
+
+export const prerender = false;
+
+const { id } = Astro.params;
+
+const project = await getEntry('projects', id!);
+if (project) {
+  return Astro.redirect(project.data.external_url);
+}
+
+return Astro.redirect('/404');
+---

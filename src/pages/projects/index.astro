@@ -1,8 +1,18 @@
 ---
 import ForefrontLayout from '@pages/_layouts/ForefrontLayout.astro';
 import Section from './_components/Section.astro';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
+
+const active_projects = await getCollection(
+  'projects',
+  ({ data }) => !data.outdated
+);
+const outdated_projects = await getCollection(
+  'projects',
+  ({ data }) => data.outdated
+);
 ---
 
 <ForefrontLayout title="Experiments, projects and stuff" description="">
@@ -20,52 +30,28 @@ export const prerender = true;
 
   <div class="flex flex-col gap-10">
     <section class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-      <Section
-        title="jetlog.dart"
-        description="Strongly typed structural logger for Dart"
-        url="https://github.com/inoutgg/jetlog.dart"
-      />
-      <Section
-        title="foundations"
-        description="A modular library designed to build maintainable production-grade systems"
-        url="https://github.com/inoutgg/foundations"
-      />
-      <Section
-        title="shield"
-        description="A modular library designed to build maintainable production-grade systems"
-        url="https://github.com/inoutgg/foundations"
-      />
-      <Section
-        title="config.nix"
-        description="Nix config for my macOS devices"
-        url="https://github.com/roman-vanesyan/config.nix"
-      />
-      <Section
-        title="romanvanesyan.com"
-        description="Source code of this website"
-        url="https://github.com/roman-vanesyan/romanvanesyan.com"
-      />
+      {
+        active_projects.map((project) => (
+          <Section
+            name={project.data.name}
+            description={project.data.description}
+            url={`/projects/${project.id}`}
+          />
+        ))
+      }
     </section>
     <section>
-      <h2 class="mb-10 font-sans text-2xl font-bold">Autodated</h2>
+      <h2 class="mb-10 font-sans text-2xl font-bold">Outdated</h2>
       <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-        <Section
-          title="graphite"
-          description="A GraphQL parser implementation in Dart"
-          url="https://github.com/roman-vanesyan/graphite"
-        />
-
-        <Section
-          title="redis.dart"
-          description="A high performance Redis/RESP client for Dart"
-          url="https://github.com/roman-vanesyan/graphite"
-        />
-
-        <Section
-          title="Refactr CLI"
-          description="I created the initial version of the CLI for Sophos Factory CI/CD"
-          url="https://github.com/sophos/factory-cli/commits?author=romanrefactr"
-        />
+        {
+          outdated_projects.map((project) => (
+            <Section
+              name={project.data.name}
+              description={project.data.description}
+              url={`/projects/${project.id}`}
+            />
+          ))
+        }
       </div>
     </section>
   </div>

@@ -1,0 +1,6 @@
+{
+  "name": "redis.dart",
+  "external_url": "https://github.com/roman-vanesyan/redis.dart",
+  "description": "A high performance Redis/RESP client for Dart",
+  "outdated": true
+}
