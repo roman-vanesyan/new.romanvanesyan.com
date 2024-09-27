@@ -20,9 +20,9 @@ export const prerender = true;
     }
   </style>
 
-  <main class="mx-auto w-full max-w-screen-lg">
-    <div class="w-full">
-      <div class="mb-12 flex flex-col md:flex-row md:gap-16">
+  <div slot="header" class="mx-auto max-w-screen-lg">
+    <div class="w-full" class="w-full">
+      <div class="flex flex-col md:flex-row md:gap-16">
         <div class="order-2 flex-1 md:order-1">
           <div class="w-full md:w-2/3">
             <Prose size="lg" color="slate">
@@ -70,7 +70,9 @@ export const prerender = true;
         </div>
       </div>
     </div>
+  </div>
 
+  <main class="mx-auto w-full max-w-screen-lg">
     <Prose size="md" color="slate">
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Section title="Engineering">
@@ -153,5 +155,5 @@ export const prerender = true;
     </Prose>
   </main>
 
-  <Footer slot="footer" class="pt-12" />
+  <Footer slot="footer" />
 </Layout>

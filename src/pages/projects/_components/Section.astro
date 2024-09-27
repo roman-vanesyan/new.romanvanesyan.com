@@ -6,7 +6,12 @@ interface Props {
 }
 ---
 
-<a href={Astro.props.url} target="_blank" class="group block">
+<a
+  href={Astro.props.url}
+  target="_blank"
+  class="group block"
+  data-astro-prefetch={false}
+>
   <h2
     class="inline-block rounded px-2 py-1 font-sans text-xl font-bold leading-none group-hover:bg-indigo-50"
   >

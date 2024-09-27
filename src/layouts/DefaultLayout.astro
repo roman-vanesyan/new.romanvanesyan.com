@@ -25,13 +25,13 @@ const scs = size[sub_content_size ?? content_size];
 ---
 
 <Layout {...rest}>
-  <header
+  <div
     slot="header"
-    class="m-auto flex flex-row justify-between py-12"
+    class="m-auto flex flex-row justify-between"
     class:list={[scs]}
   >
     <GlobalNavigation orientation="horizontal" />
-  </header>
+  </div>
 
   <main class="mx-auto flex w-full flex-grow flex-col" class:list={[cs]}>
     <slot />

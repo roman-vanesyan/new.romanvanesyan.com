@@ -1,0 +1,6 @@
+{
+  "name": "conduit",
+  "external_url": "https://github.com/inoutgg/conduit",
+  "description": "An SQL migrator for Go that is easy to embed",
+  "outdated": false
+}

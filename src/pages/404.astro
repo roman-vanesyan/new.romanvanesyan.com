@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+}
+---
+
+<BaseLayout {...Astro.props}>
+  <style>
+    :root {
+      --bg-color: theme('colors.pink.400') !important;
+    }
+  </style>
+
+  <main class="flex-column flex h-screen w-screen">
+    <div
+      class="flex-column relative m-auto flex w-64 flex-wrap items-center justify-center gap-4"
+    >
+      <div class="text-center">
+        <span
+          class="font-2xl mix-blend- -mb-8 block text-pretty text-xl font-bold leading-none text-white"
+        >
+          The page you are looking for does not exist on this website.
+        </span>
+        <h1
+          class="relative z-10 -mt-16 inline-block select-none text-9xl font-bold leading-none text-blue-500 mix-blend-multiply"
+        >
+          404
+        </h1>
+      </div>
+      <a href="/" class="block text-4xl font-bold text-pink-900">Home {'->'}</a>
+    </div>
+  </main>
+</BaseLayout>

@@ -8,27 +8,27 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
-    "@astrojs/cloudflare": "^11.0.4",
-    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/cloudflare": "^11.1.0",
+    "@astrojs/mdx": "^3.1.7",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
-    "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.14.5",
-    "date-fns": "^3.6.0",
-    "drizzle-kit": "^0.24.1",
+    "@astrojs/tailwind": "^5.1.1",
+    "astro": "^4.15.9",
+    "date-fns": "^4.1.0",
+    "drizzle-kit": "^0.24.2",
     "drizzle-orm": "^0.33.0",
     "htmx.org": "^1.9.12",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^3.4.13",
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240821.1",
-    "@tailwindcss/typography": "^0.5.14",
+    "@cloudflare/workers-types": "^4.20240925.0",
+    "@tailwindcss/typography": "^0.5.15",
     "prettier": "^3.3.3",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.6",
-    "typescript": "^5.5.4"
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "typescript": "^5.6.2"
   }
 }

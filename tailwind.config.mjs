@@ -15,11 +15,7 @@ export default {
       },
 
       fontFamily: {
-        serif: [
-          'Merriweather',
-          'IBM Plex Serif',
-          ...defaultTheme.fontFamily.serif
-        ],
+        serif: ['"Source Serif 4"', ...defaultTheme.fontFamily.serif],
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
         mono: ['IBM Plex Mono', ...defaultTheme.fontFamily.mono]
       },
