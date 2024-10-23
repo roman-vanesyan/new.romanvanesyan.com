@@ -1,0 +1,51 @@
+---
+heading: Load environment variables safely in Go
+description: A declarative approach to load type-safe no
+draft: true
+published_at: 2024-09-28
+tags: ['go']
+authored_by: roman-vanesyan
+---
+
+Environment variables are by far one of simplest yet very useful creature.
+
+Some time ago there was a popular pattern that the TypeScript community was bragging about - type-safe access to environment variables.
+
+Basically you define a zod schema and the rest is not your deal:
+
+```js
+const env = createEnv({
+  DATABASE_URL: z.string().url(),
+  PORT: z.integer().nonnegative()
+});
+
+env.DATABASE_URL; // string
+```
+
+Cool, ain't it!
+
+The beaty of this pattern is that you define the configuration structure declaratively. It the only right way to work with configurations, as it keeps all necessary information local in one place. You know whether configuration field value is optinal, what pattern it follows, and how it is mapped (i.e., to what environment variable it points to).
+
+What if I tell you that it is not only possible to do it in TypeScript, but also in Go. Go got an excellent addition since 1.18+ - generics, basically, what was previously `interface{}` now is a strong type. And that's what we will use to
+
+Enough words, give me example! Sure thing:
+
+```go
+// Define configuration structure.
+type Config struct {
+	Port         int    `env:"APP_PORT" validator:"int"`
+	CookieSecret string `env:"COOKIE_SECRET" validator:"string"`
+	DatabaseURL  string `env:"DATABASE_URL" validator:"url"`
+}
+
+func main() {
+	config, err := config.Load[Config]()
+	if err != nil {
+		panic(err)
+	}
+
+	// It is safe to access config here on...
+}
+```
+
+The complete source code is available in the [foundations](https://github.com/inoutgg/foundations/blob/0be999149d7c15bcb1168e8603bff199f6b25fd2/env/env.go).

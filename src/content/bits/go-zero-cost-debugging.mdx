@@ -1,0 +1,12 @@
+---
+heading: Zero cost debugging in Go
+description: A zero cost technique for runtime debugging in Go
+draft: true
+published_at: 2024-08-30
+tags: ['go', 'logging']
+authored_by: roman-vanesyan
+---
+
+Imagine not so rare sutiation when you want to log some debugging message that doesn't quite warrant to be logged by the application logger due to whatever reason, let's this logged information only needed when debugging the tool locally, or you don't want to add additional load on the logger that already emits 10_000 logs per second.
+
+If you remember the times when TJ Holowaychuk was an active Node.js ecosystem contributor, than you probably remembers that handy little debugging tool called [debug](https://github.com/debug-js/debug) that was popular at that time.
